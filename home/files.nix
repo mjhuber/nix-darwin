@@ -5,6 +5,9 @@
   home.file.".exports".source = ./dotfiles/zsh/.exports;
   home.file.".gitconfig".source = ./dotfiles/.gitconfig;
   home.file.".gitignore".source = ./dotfiles/.gitignore_global;
+  home.file.".p10k.zsh".source = ./dotfiles/zsh/.p10k.zsh;
+  home.file.".curlrc".source = ./dotfiles/.curlrc;
+  home.file.".ackrc".source = ./dotfiles/.ackrc;
 
   # powerlevel10k
   home.file."powerlevel10k" = {

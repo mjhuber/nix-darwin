@@ -78,10 +78,6 @@ if [ -f '/Users/huberm/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/hu
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
-# fast-syntax-highlighting
-# https://github.com/zdharma-continuum/fast-syntax-highlighting
-source ~/.fsh/fast-syntax-highlighting.plugin.zsh
-
 # max open files
 ulimit -n 10240
 
