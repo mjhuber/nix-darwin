@@ -3,6 +3,7 @@
 {
   # import sub modules
   imports = [
+    #./git.nix
   ];
 
   # Home Manager needs a bit of information about you and the

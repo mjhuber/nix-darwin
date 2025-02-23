@@ -29,7 +29,9 @@
       # List packages installed in system profile. To search by name, run:
       # $ nix-env -qaP | grep wget
       environment.systemPackages =
-        [ pkgs.vim
+        [ 
+          pkgs.vim
+          pkgs.home-manager
         ];
 
       # Necessary for using flakes on this system.
@@ -66,10 +68,11 @@
         # home manager
         home-manager.darwinModules.home-manager
         {
+          users.users.${username}.home = "/Users/${username}";
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
           home-manager.extraSpecialArgs = specialArgs;
-          #home-manager.users.${username} = import ./home;
+          home-manager.users.${username} = import ./home;
         }
       ];
     };
