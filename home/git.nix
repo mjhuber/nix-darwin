@@ -34,9 +34,15 @@
     delta = {
       enable = true;
       options = {
+        navigate = true;
+        line-numbers = true;
         features = "side-by-side";
       };
     };
+
+    ignores = [
+      ".DS_Store"
+    ];
 
     aliases = {
       aa = "add -A";

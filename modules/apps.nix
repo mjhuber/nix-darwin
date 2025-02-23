@@ -20,6 +20,7 @@
     ack
     appcleaner
     asdf-vm
+    atuin
     coreutils
     direnv
     elixir
@@ -86,10 +87,12 @@
     casks = [
       "alfred"
       "bartender"
+      "betterdisplay"
       "claude"
       "contexts"
       "fantastical"
       "firefox"
+      "logi-options+"
       "moom"
       "zed"
       # "google-chrome"

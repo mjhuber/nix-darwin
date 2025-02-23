@@ -3,7 +3,8 @@
 {
   # import sub modules
   imports = [
-    #./git.nix
+    ./git.nix
+    ./wezterm.nix
   ];
 
   # Home Manager needs a bit of information about you and the
