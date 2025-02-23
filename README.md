@@ -11,7 +11,7 @@ Here's a good tutorial on getting started with nix on mac: [Setting up Nix on ma
 sudo scutil --set HostName huberm && \
   sudo scutil --set ComputerName huberm
 ```
-5.  Run `make deploy`.
+5.  Run `make deploy`.  Whenever you make changes to your configuration, also run this command to converge the state.
 
 ## Config Structure
 
