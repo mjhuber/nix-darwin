@@ -32,6 +32,7 @@
     krew
     kubectl
     kubectx
+    kubernetes-helm
     kubie
     mas
     mkalias

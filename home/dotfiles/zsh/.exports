@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+export EDITOR='nvim'
+export ERL_AFLAGS="-kernel shell_history enabled"
+export GOBIN=$GOPATH/bin
+export GOPATH="$HOME/go"
+export GO111MODULE=on
+export GPG_TTY=$(tty);
+export HELM_HOME="$HOME/.helm"
+export HTTPSTAT_SHOW_SPEED="true"
+export LANG='en_US.UTF-8';
+export LC_ALL='en_US.UTF-8';
+export LESS_TERMCAP_md="${yellow}";
+export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
+export PATH="$PATH:$GOPATH:$GOBIN"
+export PATH="${PATH}:${HOME}/.krew/bin"
+export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
+export PYTHONIOENCODING='UTF-8';
+export USE_GKE_GCLOUD_AUTH_PLUGIN=True
+export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=/usr/local/share/zsh-syntax-highlighting/highlighters
