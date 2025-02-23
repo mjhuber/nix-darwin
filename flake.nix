@@ -7,10 +7,24 @@
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
     # makes dmgs indexed by spotlight
     mac-app-util.url = "github:hraban/mac-app-util";
+
+    home-manager = {
+      url = "github:nix-community/home-manager/master";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = inputs@{ self, nix-darwin, nixpkgs, mac-app-util, ... }:
+  outputs = inputs@{ self, nix-darwin, nixpkgs, mac-app-util, home-manager, ... }:
   let
+    username = "huberm";
+    hostname = "huberm";
+    useremail = "pfp2024@gmail.com";
+    system = "aarch64-darwin";
+    specialArgs =
+      inputs
+      // {
+      inherit username useremail hostname;
+      };
     configuration = { pkgs, ... }: {
       # List packages installed in system profile. To search by name, run:
       # $ nix-env -qaP | grep wget
@@ -41,12 +55,22 @@
   {
     # Build darwin flake using:
     # $ darwin-rebuild build --flake .#simple
-    darwinConfigurations."huberm" = nix-darwin.lib.darwinSystem {
+    darwinConfigurations."${hostname}" = nix-darwin.lib.darwinSystem {
+      inherit system specialArgs;
       modules = [
         configuration
         ./modules/apps.nix
         ./modules/system.nix
         mac-app-util.darwinModules.default
+
+        # home manager
+        home-manager.darwinModules.home-manager
+        {
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
+          home-manager.extraSpecialArgs = specialArgs;
+          #home-manager.users.${username} = import ./home;
+        }
       ];
     };
   };

@@ -20,7 +20,6 @@
     ack
     appcleaner
     asdf-vm
-    bartender
     coreutils
     direnv
     elixir
@@ -85,12 +84,14 @@
     # `brew install --cask`
     # add your apps here.
     casks = [
-      "firefox"
       "alfred"
+      "bartender"
+      "claude"
       "contexts"
+      "fantastical"
+      "firefox"
       "moom"
       "zed"
-      "fantastical"
       # "google-chrome"
     ];
   };

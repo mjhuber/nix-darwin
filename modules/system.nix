@@ -30,6 +30,7 @@
 
       finder = {
         _FXShowPosixPathInTitle = true;  # show full path in finder title
+        FXPreferredViewStyle = "Nlsv";  # set default view style to list
         AppleShowAllExtensions = true;  # show all file extensions
         FXEnableExtensionChangeWarning = false;  # disable warning when changing file extension
         QuitMenuItem = true;  # enable quit menu item
