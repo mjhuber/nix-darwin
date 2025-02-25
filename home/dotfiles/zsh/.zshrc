@@ -32,7 +32,7 @@ POWERLEVEL9K_PROMPT_ON_NEWLINE=true
 POWERLEVEL9K_PROMPT_ADD_NEWLINE=true
 
 # activate syntax highlighting
-source ~/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source ~/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
 
 # use a cache for completions
 zstyle ':completion:*' use-cache on

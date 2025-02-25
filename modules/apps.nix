@@ -47,6 +47,7 @@
     vscode
     wezterm
     wget
+    youtube-music
     yq-go
     zsh
   ];
@@ -90,11 +91,14 @@
       "bartender"
       "betterdisplay"
       "claude"
+      "cleanshot"
+      "clop"
       "contexts"
       "fantastical"
       "firefox"
       "logi-options+"
       "moom"
+      "popclip"
       "zed"
       # "google-chrome"
     ];

@@ -20,17 +20,6 @@
     recursive = true;
   };
 
-  # zsh-syntax-highlighting
-  home.file."zsh-syntax-highlighting" = {
-    source = pkgs.fetchFromGitHub {
-      owner = "zsh-users";
-      repo = "zsh-syntax-highlighting";
-      rev = "0.8.0";
-      sha256 = "iJdWopZwHpSyYl5/FQXEW7gl/SrKaYDEtTH9cGP7iPo=";
-    };
-    recursive = true;
-  };
-
   # zsh-autosuggestions
   home.file."zsh-autosuggestions" = {
     source = pkgs.fetchFromGitHub {
@@ -38,6 +27,17 @@
       repo = "zsh-autosuggestions";
       rev = "v0.7.1";
       sha256 = "vpTyYq9ZgfgdDsWzjxVAE7FZH4MALMNZIFyEOBLm5Qo=";
+    };
+    recursive = true;
+  };
+
+  # fast-syntax-highlighting
+  home.file."fast-syntax-highlighting" = {
+    source = pkgs.fetchFromGitHub {
+      owner = "zdharma-continuum";
+      repo = "fast-syntax-highlighting";
+      rev = "v1.55";
+      sha256 = "DWVFBoICroKaKgByLmDEo4O+xo6eA8YO792g8t8R7kA=";
     };
     recursive = true;
   };
