@@ -23,7 +23,6 @@
     atuin
     coreutils
     direnv
-    discord
     elixir
     git
     gnugrep
