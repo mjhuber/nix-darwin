@@ -23,6 +23,7 @@
     atuin
     coreutils
     direnv
+    discord
     elixir
     git
     gnugrep
@@ -89,6 +90,7 @@
     casks = [
       "alfred"
       "bartender"
+      "bazecor"
       "betterdisplay"
       "claude"
       "cleanshot"
