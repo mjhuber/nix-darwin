@@ -24,6 +24,7 @@
     coreutils
     direnv
     elixir
+    hack-font
     git
     gnugrep
     gnused

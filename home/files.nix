@@ -8,6 +8,7 @@
   home.file.".p10k.zsh".source = ./dotfiles/zsh/.p10k.zsh;
   home.file.".curlrc".source = ./dotfiles/.curlrc;
   home.file.".ackrc".source = ./dotfiles/.ackrc;
+  home.file.".config/nvim/init.vim".source = ./dotfiles/init.vim;
 
   # powerlevel10k
   home.file."powerlevel10k" = {
@@ -40,5 +41,13 @@
       sha256 = "DWVFBoICroKaKgByLmDEo4O+xo6eA8YO792g8t8R7kA=";
     };
     recursive = true;
+  };
+
+  # vim-plug
+  home.file.".local/share/nvim/site/autoload/plug.vim" = {
+    source = pkgs.fetchurl {
+      url = "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim";
+      sha256 = "1nywzjd9nfr7sqqbdi69wza305q3vp26i0390j1884wdz6awid10";
+    };
   };
 }
