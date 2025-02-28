@@ -9,6 +9,10 @@
   home.file.".curlrc".source = ./dotfiles/.curlrc;
   home.file.".ackrc".source = ./dotfiles/.ackrc;
   home.file.".config/nvim/init.vim".source = ./dotfiles/init.vim;
+  home.file.".ssh/config".source = ./dotfiles/ssh_config;
+  home.file.".config/zed/settings.json".source = ./dotfiles/zed/settings.json;
+  home.file.".config/zed/keymap.json".source = ./dotfiles/zed/keymap.json;
+  home.file.".config/zed/themes/penumbra.json".source = ./dotfiles/zed/themes/penumbra.json;
 
   # powerlevel10k
   home.file."powerlevel10k" = {

@@ -1,0 +1,28 @@
+# Added by OrbStack: 'orb' SSH host for Linux machines
+# This only works if it's at the top of ssh_config (before any Host blocks).
+# This won't be added again if you remove it.
+Include ~/.orbstack/ssh/config
+
+Host 192.168.*.*
+  User huberm
+  IdentityFile ~/.ssh/id_rsa
+  AddKeysToAgent yes
+
+Host 10.* *.rechargeapps.net recharge-*
+  User mhuber_rechargeapps_com
+  IdentityFile ~/.ssh/id_rsa_recharge
+  ForwardAgent yes
+  StrictHostKeyChecking accept-new
+
+Host github.com
+  User mjhuber
+  IdentityFile ~/.ssh/id_rsa
+
+Host gitlab.rechargeapps.net gitlab.skunk.rechargeapps.net
+  User mhuber
+  IdentityFile ~/.ssh/id_rsa_recharge
+
+Host *
+  AddKeysToAgent yes
+  User huberm
+  IdentityFile ~/.ssh/id_rsa

@@ -1,0 +1,40 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+{
+  "base_keymap": "SublimeText",
+  "theme": {
+    "mode": "dark",
+    "dark": "Penumbra Dark",
+    "light": "One Light"
+  },
+  "buffer_font_size": 24,
+  "buffer_font_family": "Menlo",
+  "buffer_line_height": "comfortable",
+  "ui_font_size": 18,
+  "auto_updates": true,
+  "load_direnv": "direct",
+  "format_on_save": "on",
+  "project_panel": {
+    "default_width": 260
+  },
+  "tabs": {
+    "git_status": true
+  },
+  "terminal": {
+    "shell": {
+      "program": "/opt/homebrew/bin/zsh"
+    }
+  },
+  "language_overrides": {
+    "Go": {
+      "format_on_save": {
+        "external": {
+          "command": "gofmt",
+          "arguments": []
+        }
+      }
+    }
+  }
+}
