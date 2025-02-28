@@ -1,7 +1,7 @@
 call plug#begin()
 
 " Plugins
-Plug 'vim-airline/vim-airline'
+Plug 'itchyny/lightline.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'NLKNguyen/papercolor-theme'
 
@@ -16,7 +16,7 @@ set lazyredraw
 set showmatch
 set incsearch
 
-set background=dark
+set background=light
 colorscheme PaperColor
 
 set tabstop=2 shiftwidth=2 expandtab
