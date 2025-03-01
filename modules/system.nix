@@ -26,12 +26,21 @@
       dock = {
         autohide = false;
         show-recents = false;  # disable recent apps
+        orientation = "bottom";
+        persistent-apps = [
+          { app = "/Applications/Nix Trampolines/WezTerm.app"; }
+          { app = "/Applications/Fantastical.app"; }
+          { app = "/Applications/Nix Trampolines/Slack.app"; }
+          { app = "/Applications/Nix Trampolines/Visual Studio Code.app"; }
+          { app = "/Applications/Claude.app"; }
+        ];
       };
 
       finder = {
         _FXShowPosixPathInTitle = true;  # show full path in finder title
         FXPreferredViewStyle = "Nlsv";  # set default view style to list
         AppleShowAllExtensions = true;  # show all file extensions
+        AppleShowAllFiles = true; # show hidden files
         FXEnableExtensionChangeWarning = false;  # disable warning when changing file extension
         QuitMenuItem = true;  # enable quit menu item
         ShowPathbar = true;  # show path bar
@@ -48,11 +57,13 @@
       # Incomplete list of macOS `defaults` commands :
       #   https://github.com/yannbertrand/macos-defaults
       NSGlobalDomain = {
+        "com.apple.mouse.tapBehavior" = 1; # enable tap to click
         "com.apple.swipescrolldirection" = true;  # enable natural scrolling(default to true)
         "com.apple.sound.beep.feedback" = 0;  # disable beep sound when pressing volume up/down key
         AppleKeyboardUIMode = 3;  # Mode 3 enables full keyboard control.
         ApplePressAndHoldEnabled = true;  # enable press and hold
-
+        AppleShowAllExtensions = true; # show all file extensions in finder
+        AppleShowAllFiles = true; # show hidden files in finder
         # If you press and hold certain keyboard keys when in a text area, the key’s character begins to repeat.
         # This is very useful for vim users, they use `hjkl` to move cursor.
         # sets how long it takes before it starts repeating.
@@ -67,6 +78,10 @@
         NSAutomaticSpellingCorrectionEnabled = false;  # disable auto spelling correction
         NSNavPanelExpandedStateForSaveMode = true;  # expand save panel by default
         NSNavPanelExpandedStateForSaveMode2 = true;
+      };
+
+      SoftwareUpdate = {
+        AutomaticallyInstallMacOSUpdates = true;
       };
 
       # Customize settings that not supported by nix-darwin directly
