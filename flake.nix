@@ -17,9 +17,10 @@
   outputs = inputs@{ self, nix-darwin, nixpkgs, mac-app-util, home-manager, ... }:
   let
     username = "huberm";
-    hostname = "huberm";
+    hostname = "huberm-mbair";
     useremail = "pfp2024@gmail.com";
     system = "aarch64-darwin";
+    modDir = "${self}/modules";
     specialArgs =
       inputs
       // {
