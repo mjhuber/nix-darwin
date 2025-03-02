@@ -3,8 +3,13 @@
 {
   # import sub modules
   imports = [
+    "${modDir}/programs/curl.nix"
+    "${modDir}/programs/git.nix"
+    "${modDir}/programs/nvim.nix"
+    "${modDir}/programs/openssh.nix"
     "${modDir}/programs/wezterm.nix"
-    ./files.nix
+    "${modDir}/programs/zed.nix"
+    "${modDir}/programs/zsh.nix"
   ];
 
   # Home Manager needs a bit of information about you and the
@@ -18,6 +23,8 @@
       bat
       eza
       google-cloud-sdk
+      signal-desktop
+      zoom-us
     ];
 
     # This value determines the Home Manager release that your

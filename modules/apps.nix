@@ -17,7 +17,6 @@
   #
   # Related Discussion: https://discourse.nixos.org/t/darwin-again/29331
   environment.systemPackages = with pkgs; [
-    ack
     appcleaner
     asdf-vm
     atuin
@@ -25,7 +24,6 @@
     direnv
     elixir
     hack-font
-    git
     gnugrep
     gnused
     go
@@ -38,7 +36,6 @@
     kubie
     mas
     mkalias
-    neovim
     obsidian
     pre-commit
     silver-searcher
@@ -48,11 +45,9 @@
     unixtools.watch
     vim
     vscode
-    wezterm
     wget
     youtube-music
     yq-go
-    zsh
   ];
 
   # The apps installed by homebrew are not managed by nix, and not reproducible!
@@ -103,8 +98,6 @@
       "logi-options+"
       "moom"
       "popclip"
-      "zed"
-      # "google-chrome"
     ];
   };
 }
