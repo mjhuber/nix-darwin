@@ -5,6 +5,7 @@
   imports = [
     "${modDir}/programs/curl.nix"
     "${modDir}/programs/git.nix"
+    "${modDir}/programs/go.nix"
     "${modDir}/programs/nvim.nix"
     "${modDir}/programs/openssh.nix"
     "${modDir}/programs/wezterm.nix"
@@ -28,7 +29,6 @@
       eza
       gnugrep
       gnused
-      go
       google-cloud-sdk
       jq
       krew
