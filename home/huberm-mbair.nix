@@ -20,10 +20,31 @@
 
     packages = with pkgs; [
       _1password-cli
+      asdf-vm
+      atuin
       bat
+      direnv
+      elixir
       eza
+      gnugrep
+      gnused
+      go
       google-cloud-sdk
+      jq
+      krew
+      kubectl
+      kubectx
+      kubernetes-helm
+      kubie
+      pre-commit
       signal-desktop
+      silver-searcher
+      stern
+      tree
+      unixtools.watch
+      wget
+      youtube-music
+      yq-go
       zoom-us
     ];
 

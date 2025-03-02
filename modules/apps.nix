@@ -18,36 +18,15 @@
   # Related Discussion: https://discourse.nixos.org/t/darwin-again/29331
   environment.systemPackages = with pkgs; [
     appcleaner
-    asdf-vm
-    atuin
     coreutils
-    direnv
-    elixir
     hack-font
-    gnugrep
-    gnused
-    go
     home-manager
-    jq
-    krew
-    kubectl
-    kubectx
-    kubernetes-helm
-    kubie
     mas
     mkalias
     obsidian
-    pre-commit
-    silver-searcher
     slack
-    stern
-    tree
-    unixtools.watch
     vim
     vscode
-    wget
-    youtube-music
-    yq-go
   ];
 
   # The apps installed by homebrew are not managed by nix, and not reproducible!
