@@ -1,10 +1,9 @@
-{ pkgs, username, useremail, hostname, ... }:
+{ modDir, pkgs, username, useremail, hostname, ... }:
 
 {
   # import sub modules
   imports = [
-    ./packages.nix
-    ../modules/programs/wezterm.nix
+    "${modDir}/programs/wezterm.nix"
     ./files.nix
   ];
 
@@ -13,6 +12,13 @@
   home = {
     username = username;
     homeDirectory = "/Users/${username}";
+
+    packages = with pkgs; [
+      _1password-cli
+      bat
+      eza
+      google-cloud-sdk
+    ];
 
     # This value determines the Home Manager release that your
     # configuration is compatible with. This helps avoid breakage

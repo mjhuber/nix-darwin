@@ -24,7 +24,7 @@
     specialArgs =
       inputs
       // {
-      inherit username useremail hostname self;
+      inherit username useremail hostname self modDir;
       };
   in
   {
@@ -45,7 +45,7 @@
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
           home-manager.extraSpecialArgs = specialArgs;
-          home-manager.users.${username} = import ./home;
+          home-manager.users.${username} = import ./home/${hostname};
         }
       ];
     };
