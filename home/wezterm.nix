@@ -60,8 +60,5 @@
 
       return config
     '';
-
-
-
   };
 }

@@ -28,7 +28,6 @@
         show-recents = false;  # disable recent apps
         orientation = "bottom";
         persistent-apps = [
-          { app = "/Applications/Nix Trampolines/WezTerm.app"; }
           { app = "/Applications/Fantastical.app"; }
           { app = "/Applications/Nix Trampolines/Slack.app"; }
           { app = "/Applications/Nix Trampolines/Visual Studio Code.app"; }
