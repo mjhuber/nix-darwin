@@ -29,6 +29,7 @@
     gnugrep
     gnused
     go
+    home-manager
     jq
     krew
     kubectl
@@ -45,6 +46,7 @@
     stern
     tree
     unixtools.watch
+    vim
     vscode
     wezterm
     wget
