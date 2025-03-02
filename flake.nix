@@ -21,10 +21,11 @@
     useremail = "pfp2024@gmail.com";
     system = "aarch64-darwin";
     modDir = "${self}/modules";
+    filesDir = "${self}/files";
     specialArgs =
       inputs
       // {
-      inherit username useremail hostname self modDir;
+      inherit username useremail hostname self modDir filesDir;
       };
   in
   {

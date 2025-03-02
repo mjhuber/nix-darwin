@@ -1,18 +1,18 @@
-{ pkgs, username, ... }: {
-  home.file.".zshrc".source = ../files/zsh/.zshrc;
-  home.file.".functions".source = ../files/zsh/.functions;
-  home.file.".aliases".source = ../files/zsh/.aliases;
-  home.file.".exports".source = ../files/zsh/.exports;
-  home.file.".gitconfig".source = ../files/.gitconfig;
-  home.file.".gitignore".source = ../files/.gitignore_global;
-  home.file.".p10k.zsh".source = ../files/zsh/.p10k.zsh;
-  home.file.".curlrc".source = ../files/.curlrc;
-  home.file.".ackrc".source = ../files/.ackrc;
-  home.file.".config/nvim/init.vim".source = ../files/init.vim;
-  home.file.".ssh/config".source = ../files/ssh_config;
-  home.file.".config/zed/settings.json".source = ../files/zed/settings.json;
-  home.file.".config/zed/keymap.json".source = ../files/zed/keymap.json;
-  home.file.".config/zed/themes/penumbra.json".source = ../files/zed/themes/penumbra.json;
+{ pkgs, username, filesDir, ... }: {
+  home.file.".zshrc".source = "${filesDir}/zsh/.zshrc";
+  home.file.".functions".source = "${filesDir}/zsh/.functions";
+  home.file.".aliases".source = "${filesDir}/zsh/.aliases";
+  home.file.".exports".source = "${filesDir}/zsh/.exports";
+  home.file.".gitconfig".source = "${filesDir}/.gitconfig";
+  home.file.".gitignore".source = "${filesDir}/.gitignore_global";
+  home.file.".p10k.zsh".source = "${filesDir}/zsh/.p10k.zsh";
+  home.file.".curlrc".source = "${filesDir}/.curlrc";
+  home.file.".ackrc".source = "${filesDir}/.ackrc";
+  home.file.".config/nvim/init.vim".source = "${filesDir}/init.vim";
+  home.file.".ssh/config".source = "${filesDir}/ssh_config";
+  home.file.".config/zed/settings.json".source = "${filesDir}/zed/settings.json";
+  home.file.".config/zed/keymap.json".source = "${filesDir}/zed/keymap.json";
+  home.file.".config/zed/themes/penumbra.json".source = "${filesDir}/zed/themes/penumbra.json";
 
   # powerlevel10k
   home.file."powerlevel10k" = {
