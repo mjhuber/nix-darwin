@@ -27,12 +27,6 @@
         autohide = false;
         show-recents = false;  # disable recent apps
         orientation = "bottom";
-        persistent-apps = [
-          { app = "/Applications/Fantastical.app"; }
-          { app = "/Applications/Nix Trampolines/Slack.app"; }
-          { app = "/Applications/Nix Trampolines/Visual Studio Code.app"; }
-          { app = "/Applications/Claude.app"; }
-        ];
       };
 
       finder = {

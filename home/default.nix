@@ -4,7 +4,7 @@
   # import sub modules
   imports = [
     ./packages.nix
-    ./wezterm.nix
+    ../modules/programs/wezterm.nix
     ./files.nix
   ];
 
