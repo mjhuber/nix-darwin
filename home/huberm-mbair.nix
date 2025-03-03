@@ -29,6 +29,7 @@
       eza
       gnugrep
       gnused
+      golangci-lint
       google-cloud-sdk
       jq
       krew

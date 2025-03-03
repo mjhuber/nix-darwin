@@ -3,11 +3,15 @@
 // For information on how to configure Zed, see the Zed
 // documentation: https://zed.dev/docs/configuring-zed
 {
-  "base_keymap": "SublimeText",
+  "base_keymap": "VSCode",
   "theme": {
     "mode": "dark",
-    "dark": "Penumbra Dark",
+    "dark": "Catppuccin Frappe",
     "light": "One Light"
+  },
+  "icon_theme": {
+    "mode": "dark",
+    "dark": "Catppuccin Icons"
   },
   "buffer_font_size": 24,
   "buffer_font_family": "Menlo",
@@ -16,6 +20,11 @@
   "auto_updates": true,
   "load_direnv": "direct",
   "format_on_save": "on",
+  "auto_install_extension": {
+    "catppuccin": true,
+    "catppuccin-icons": true,
+    "elixir": true
+  },
   "project_panel": {
     "default_width": 260
   },
@@ -24,7 +33,7 @@
   },
   "terminal": {
     "shell": {
-      "program": "/opt/homebrew/bin/zsh"
+      "program": "/etc/profiles/per-user/huberm/bin/zsh"
     }
   },
   "language_overrides": {

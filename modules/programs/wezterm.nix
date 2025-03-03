@@ -24,21 +24,15 @@
       
       config.font_size = 15.0
       config.window_background_opacity = 1.00
-      config.color_scheme = 'MaterialDesignColors'
+      config.color_scheme = 'Catppuccin Frappe'
       config.window_background_opacity = 1.00
-      config.colors = {
-        background = '#3b3939',
 
-        tab_bar = {
-          inactive_tab = {
-            bg_color = "#2e2d2d",
-            fg_color = '#b0aeae',
-          },
-          active_tab = {
-            bg_color = "#786f6f",
-            fg_color = '#ffffff',
-          },
-        },
+      config.window_frame = {
+        font_size = 15.0,
+        active_titlebar_bg = "#232634",
+        inactive_titlebar_bg = "#232634",
+        active_titlebar_fg = "#c6d0f5",
+        inactive_titlebar_fg = "#c6d0f5"
       }
 
       config.keys = {
