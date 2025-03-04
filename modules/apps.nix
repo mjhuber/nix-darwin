@@ -53,12 +53,13 @@
 
     taps = [
       "homebrew/services"
+      "mfuentesg/tap"
     ];
 
     # `brew install`
     # add your apps here.
     brews = [
-      # "aria2"  # download tool
+      "ksd"
     ];
 
     # `brew install --cask`

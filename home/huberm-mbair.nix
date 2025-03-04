@@ -24,6 +24,7 @@
       asdf-vm
       atuin
       bat
+      delta
       direnv
       elixir
       eza
@@ -34,6 +35,7 @@
       jq
       krew
       kubectl
+      kubectl-neat
       kubectx
       kubernetes-helm
       kubie
