@@ -3,7 +3,7 @@ call plug#begin()
 " Plugins
 Plug 'itchyny/lightline.vim'
 Plug 'airblade/vim-gitgutter'
-Plug 'NLKNguyen/papercolor-theme'
+Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
 
 call plug#end()
 
@@ -16,8 +16,7 @@ set lazyredraw
 set showmatch
 set incsearch
 
-set background=light
-colorscheme PaperColor
+colorscheme catppuccin-frappe
 
 set tabstop=2 shiftwidth=2 expandtab
 
