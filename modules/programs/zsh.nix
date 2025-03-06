@@ -14,17 +14,6 @@
   home.file.".exports".source = "${filesDir}/zsh/.exports";
   home.file.".p10k.zsh".source = "${filesDir}/zsh/.p10k.zsh";
 
-  # powerlevel10k
-  home.file."powerlevel10k" = {
-    source = pkgs.fetchFromGitHub {
-      owner = "romkatv";
-      repo = "powerlevel10k";
-      rev = "v1.20.0";
-      sha256 = "ES5vJXHjAKw/VHjWs8Au/3R+/aotSbY7PWnWAMzCR8E=";
-    };
-    recursive = true;
-  };
-
   # zsh-autosuggestions
   home.file."zsh-autosuggestions" = {
     source = pkgs.fetchFromGitHub {
