@@ -46,7 +46,6 @@
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
           home-manager.extraSpecialArgs = specialArgs;
-          # home-manager.users.${username} = import ./home/${hostname}.nix;
           home-manager.users.${username}.imports = [
             ./home/${hostname}.nix
             mac-app-util.homeManagerModules.default

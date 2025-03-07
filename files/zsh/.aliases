@@ -8,8 +8,6 @@ alias grep='grep -i'
 #alias gh="history -f 1 | grep"
 alias gh="atuin search"
 alias gti="git"
-# hide hidden files in Finder
-alias hide="defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder"
 alias history="atuin history list"
 alias k="kubectl"
 alias kns="kubens"
@@ -24,11 +22,9 @@ if [[ "$(uname)" != 'Darwin' ]]; then
   alias pbcopy='xclip -selection clipboard'
   alias pbpaste='xclip -selection clipboard -o'
 fi
-# show hidden files in Finder
-alias show="defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder"
+
 # Enable aliases to be sudo’ed
 alias sudo='sudo '
 alias tf='terraform'
 alias vim='nvim'
-alias vinstall="vim -i NONE -c VundleUpdate -c quitall"
 alias vl="vault login -method=ldap username=mhuber"
