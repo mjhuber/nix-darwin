@@ -1,8 +1,0 @@
-[
-  {
-    "context": "Workspace",
-    "bindings": {
-      "cmd-p": "command_palette::Toggle"
-    }
-  }
-]

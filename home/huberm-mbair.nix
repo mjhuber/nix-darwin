@@ -10,7 +10,6 @@
     "${modDir}/programs/openssh.nix"
     "${modDir}/programs/starship.nix"
     "${modDir}/programs/wezterm.nix"
-    "${modDir}/programs/zed.nix"
     "${modDir}/programs/zsh.nix"
   ];
 
