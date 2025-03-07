@@ -32,6 +32,7 @@
       gnused
       golangci-lint
       google-cloud-sdk
+      helmfile-wrapped
       jq
       krew
       kubectl
