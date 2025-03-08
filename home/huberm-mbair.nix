@@ -28,6 +28,7 @@
       direnv
       elixir
       eza
+      gleam
       gnugrep
       gnused
       golangci-lint
