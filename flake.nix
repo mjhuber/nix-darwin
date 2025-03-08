@@ -27,7 +27,7 @@
         useremail = "pfp2024@gmail.com";
         system = "aarch64-darwin";
       };
-      "huberm-mbpro" = {
+      "MicahHuber-DTP6M3YJQ3" = {
         username = "huberm";
         useremail = "pfp2024@gmail.com";
         system = "aarch64-darwin";
