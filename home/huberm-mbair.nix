@@ -34,6 +34,7 @@
       google-cloud-sdk
       helmfile-wrapped
       jq
+      kind
       krew
       kubectl
       kubectl-neat

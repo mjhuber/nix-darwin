@@ -77,6 +77,7 @@
       "firefox"
       "logi-options+"
       "moom"
+      "orbstack"
       "popclip"
     ];
   };
