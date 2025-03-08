@@ -1,5 +1,5 @@
 {
-  description = "Example nix-darwin system flake";
+  description = "Multi-machine nix-darwin system flake";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
@@ -16,42 +16,60 @@
 
   outputs = inputs@{ self, nix-darwin, nixpkgs, mac-app-util, home-manager, ... }:
   let
-    username = "huberm";
-    hostname = "huberm-mbair";
-    useremail = "pfp2024@gmail.com";
-    system = "aarch64-darwin";
+    # Common variables
     modDir = "${self}/modules";
     filesDir = "${self}/files";
-    specialArgs =
-      inputs
-      // {
-      inherit username useremail hostname self modDir filesDir;
+    
+    # Define all hosts with their configurations
+    hosts = {
+      "huberm-mbair" = {
+        username = "huberm";
+        useremail = "pfp2024@gmail.com";
+        system = "aarch64-darwin";
+      };
+      "huberm-mbpro" = {
+        username = "huberm";
+        useremail = "pfp2024@gmail.com";
+        system = "aarch64-darwin";
+      };
+      # Add more hosts here as needed
+    };
+    
+    # Function to create Darwin configurations
+    mkDarwinConfig = hostname: { username, useremail, system, ... }: 
+      nix-darwin.lib.darwinSystem {
+        inherit system;
+        
+        # Create specialized args for this specific host
+        specialArgs = inputs // {
+          inherit username useremail hostname self modDir filesDir;
+        };
+        
+        modules = [
+          ./modules/configuration.nix
+          ./modules/apps.nix
+          ./modules/system.nix
+          mac-app-util.darwinModules.default
+
+          # home manager
+          home-manager.darwinModules.home-manager
+          {
+            users.users.${username}.home = "/Users/${username}";
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.extraSpecialArgs = inputs // {
+              inherit username useremail hostname self modDir filesDir;
+            };
+            home-manager.users.${username}.imports = [
+              ./home/${hostname}.nix
+              mac-app-util.homeManagerModules.default
+            ];
+          }
+        ];
       };
   in
   {
-    # Build darwin flake using:
-    # $ darwin-rebuild build --flake .#simple
-    darwinConfigurations."${hostname}" = nix-darwin.lib.darwinSystem {
-      inherit system specialArgs;
-      modules = [
-        ./modules/configuration.nix
-        ./modules/apps.nix
-        ./modules/system.nix
-        mac-app-util.darwinModules.default
-
-        # home manager
-        home-manager.darwinModules.home-manager
-        {
-          users.users.${username}.home = "/Users/${username}";
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-          home-manager.extraSpecialArgs = specialArgs;
-          home-manager.users.${username}.imports = [
-            ./home/${hostname}.nix
-            mac-app-util.homeManagerModules.default
-          ];
-        }
-      ];
-    };
+    # Map over all hosts to create configurations
+    darwinConfigurations = nixpkgs.lib.mapAttrs mkDarwinConfig hosts;
   };
 }
