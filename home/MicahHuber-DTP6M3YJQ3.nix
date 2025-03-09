@@ -47,6 +47,7 @@
       stern
       tree
       unixtools.watch
+      vals
       vault
       wget
       youtube-music

@@ -48,6 +48,7 @@
       stern
       tree
       unixtools.watch
+      vals
       wget
       youtube-music
       yq-go

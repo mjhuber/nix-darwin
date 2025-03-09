@@ -66,6 +66,7 @@
     # add your apps here.
     casks = [
       "alfred"
+      "arc"
       "bartender"
       "bazecor"
       "betterdisplay"
