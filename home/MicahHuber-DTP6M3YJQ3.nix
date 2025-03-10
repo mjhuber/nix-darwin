@@ -42,6 +42,7 @@
       kubernetes-helm
       kubie
       pre-commit
+      python3Full
       signal-desktop
       silver-searcher
       stern

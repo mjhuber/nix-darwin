@@ -47,6 +47,9 @@ setopt inc_append_history
 # Reloads the history whenever you use it
 setopt share_history
 
+# Auto rehash when command not found
+setopt nohashdirs
+
 # zsh-autosuggestions
 # https://github.com/zsh-users/zsh-autosuggestions
 source ~/zsh-autosuggestions/zsh-autosuggestions.zsh
