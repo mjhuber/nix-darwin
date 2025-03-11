@@ -28,3 +28,7 @@ sudo scutil --set HostName huberm && \
 ## FAQ
 * How do I uninstall? 
 I have not tried it but determinte [provides an uninstall script](https://zero-to-nix.com/start/uninstall/): `/nix/nix-installer uninstall`.
+
+* What if i get an error that the command `darwin-rebuild` is not found?
+Its unclear to me why determinate sometimes does this but to fix it, run `nix-env -iA nixpkgs.darwin-rebuild
+` before running `make deploy` the first time.
