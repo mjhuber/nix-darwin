@@ -49,6 +49,7 @@
       TheUnarchiver = 425424353;
       Pages = 409201541;
       Numbers = 409203825;
+      JuxtText = 6504801865;
     };
 
     taps = [
