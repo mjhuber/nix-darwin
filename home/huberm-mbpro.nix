@@ -8,6 +8,7 @@
     "${modDir}/programs/go.nix"
     "${modDir}/programs/nvim.nix"
     "${modDir}/programs/openssh.nix"
+    "${modDir}/programs/scripts.nix"
     "${modDir}/programs/starship.nix"
     "${modDir}/programs/wezterm.nix"
     "${modDir}/programs/zsh.nix"
@@ -27,6 +28,7 @@
       delta
       direnv
       elixir
+      envsubst
       eza
       gleam
       gnugrep

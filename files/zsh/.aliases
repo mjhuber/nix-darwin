@@ -4,6 +4,8 @@ alias aliases='print -rl -- ${(k)aliases} | sort | column'
 alias brews='brew leaves'
 alias bt="docker run -it us-docker.pkg.dev/recharge-infra-services-8b42/gcr.io/build-tools:3 /bin/bash"
 alias cat="bat --style=plain"
+alias gauth="gcloud auth application-default print-access-token &> /dev/null \
+   || gcloud auth application-default login"
 alias grep='grep -i'
 #alias gh="history -f 1 | grep"
 alias gh="atuin search"

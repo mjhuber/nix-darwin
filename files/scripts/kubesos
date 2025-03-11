@@ -1,0 +1,435 @@
+#!/bin/bash
+
+# Print the script usage
+print_usage() {
+  echo -e "Usage: $0 [-n namespace] [-r release] [-N | [-L | -l app(s)]] [-s since | -t timestamp ] [-m maxloglines] [-p] [-w log_timeout]\n"
+  echo "Capture Kubernetes environment, configuration and logs. Generate compressed tar bundle for GitLab support.
+
+  -n               Kubernetes namespace context to use (defaults to 'default')
+  -r               release name to reference for helm based extraction 
+  -l app           application annotation to match for log gathering (can be used multiple times)
+  -L               select applications interactively
+  -N               use pod names instead of Kubernetes app annotation
+  -s time          return logs newer than a relative duration like 5s, 2m, or 3h, defaults to 0 (all time)
+  -t time_stamp    return logs after a specific date (use RFC3339 format, e.g. 2023-12-25T07:20:50.52Z)
+  -m maxlines      override the default maximum lines output per log, (default 10000 lines). Use -1 for no limit
+  -p               prepend log entries with pod and container names
+  -w log_timeout   time to wait for log generation to complete, (default 60 seconds)"
+  exit 1
+}
+
+# Generic 'fail' function, report and exit
+fail()	{
+    echo -e "\nFAIL: $*\n" >&2
+    exit 1
+}
+
+# Print error messages
+print_error() {
+  echo "ERROR: $1" >&2
+}
+
+# Print warning messages
+print_warning() {
+  echo "WARNING: $1" >&2
+}
+
+# Sort a list uniquely
+sort_array() {
+    local array=("$*")
+    sorted=("$(echo "${array[*]}"| tr " " "\n" | sort -u)")
+    echo "${sorted[@]}"
+}
+
+# Find all K8s app labels and choose via a `select` statement
+# also performs the searches for multiple `-l app` options
+selectApps() {
+
+  # Populate ALL_APPS from available pods (use pod name if -N option provided)
+  [[ $usepodnames ]] && jsonpath='{.items..metadata.name}' || jsonpath='{.items..metadata.labels.app}'
+  IFS=" " read -r -a ALL_APPS <<< "$(kubectl get pods "${namespace[@]}" -o jsonpath="${jsonpath}")"
+
+    [[ ${ALL_APPS[*]} ]] || {
+	    print_warning "Did not find any pods by app. Falling back to pod names (you can also specify -N to force this behaviour)";
+            usepodnames=true
+	    jsonpath='{.items..metadata.name}'
+            IFS=" " read -r -a ALL_APPS <<< "$(kubectl get pods "${namespace[@]}" -o jsonpath="${jsonpath}")"
+    }
+
+    sorted_apps=$(sort_array "${ALL_APPS[@]}")
+
+    if [[ $selectapps != true ]]
+    then
+      apps=()
+
+      # Check if there's a match from the command line (-l [app])
+      search=${selectapps[*]}
+      for arg in $search
+      do
+        while IFS='' read -r app; do apps+=("$app"); done \
+        < <(printf '%s\n' "${sorted_apps[@]}" | grep "$arg")
+      done
+
+      # We matched apps from the command line, no need to select
+      [[ ${apps[*]} ]] && return
+
+    else
+  
+      echo -e "\nThe following logs are available:\n"
+  
+      PS3="Select application/pod for log extraction (Enter '1' when done):"
+  
+      SELECT=${sorted_apps[*]}
+      select app in '[END SELECTION]' $SELECT
+      do
+	      [[ $app =~ ^\[END || -z $app ]] && break
+	      [[ ${apps[*]} =~ $app ]] || apps+=("$app")
+	      echo "Will capture logs for: ${apps[*]}"
+      done
+
+    fi
+
+}
+
+
+# Validate `since` (-s)  parameter
+validate_since() {
+    [[ ${since_time} ]] && fail "'-s (since)' and '-t (since-time)' options are mutually exclusive, specify one only"
+    [[ $since ]] && { echo "SINCE: $since"; kubectl logs notreallyapod --since="$since" 2>&1 | grep -q "NotFound" || fail "Failed to validate 'since' parameter.\n\nSince can be specified in (s)econds, (m)inutes or (h)ours, e.g. -s 3h"; }
+}
+
+# Validate `since-time` (-t) option
+validate_since_time() {
+    [[ $since ]] && fail "'-s (since)' and '-t (since-time)' options are mutually exclusive, specify one only"
+    [[ $since_time ]] && { echo "SINCE_TIME: $since_time"; kubectl logs notreallyapod --since-time="$since_time" 2>&1 | grep -q "NotFound" || fail "Failed to validate 'since-time' parameter.\n\nSpecify a valid RFC3339 timestamp, e.g. $(date +%Y)-01-30T03:00:00Z"; }
+}
+
+# Perform time validations validations
+validate_params() {
+    [[ $since ]] && validate_since
+    [[ $since_time ]] && validate_since_time
+
+}
+
+create_archive_directory() {
+    # Set the timestamp and archive directory
+    timestamp="$(date +%d%m%Y%H%M%S)"
+    archive_dir="./kubesos-$timestamp"
+    mkdir -p "$archive_dir" || fail "Unable to create output directory"
+}
+
+# Retrieve release and namespace values
+get_release_and_namespace() {
+  echo "Determining namespace and release (helm)"
+  # Determine namespace and release if not set
+  [[ -z "$namesp" && -z "$release" ]] && {
+    read -r r n < <(helm list -A | awk '/\tgitlab-[0-9]/ { print $1" "$2; exit }');
+    namesp=${n:-gitlab};
+    release=${r:-gitlab};
+    echo "Namespace [$namesp], Release [$release] - best guess for namespace and release";
+  } || {
+    # Get release from namespace if not specified
+    [[ -z "$release" && "$namesp" ]] && {
+    read -r r < <(helm list -n "${namesp}" | awk '/'"${namesp}"'/ { print $1; exit }');
+    release=${r:-gitlab};
+    echo "Namespace [$namesp], Release [$release] - best guess for release";
+    }
+  } || {
+    # Get namespace from first matching release (-r option only specified)
+    [[ "$release" && -z "$namesp" ]] && {
+    read -r n < <(helm list -A | awk '/^'"${release}"' / { print $2; exit }');
+    namesp=${n};
+    echo "Namespace [$namesp], Release [$release] - best guess for namespace";
+   }
+  }
+  # Otherwise default namespace to 'default'
+  namespace=("-n" "${namesp:-default}")
+}
+
+# Get and validate kubectl version
+get_kubectl_version() {
+  echo "Getting kubectl version..."
+  kubectl_check="$(kubectl version 2> /dev/null)"
+
+  if [ -n "$kubectl_check" ]; then
+    echo "$kubectl_check" > "$archive_dir"/kubectl-check
+  else
+    print_error "Could not load kubectl version. Make sure kubectl is installed."
+    exit 1
+  fi
+
+  # The `--short` flag was removed in version 1.28 and made the default format
+  # If the `kubectl version` output contains "Major" then it is pre-1.28 and needs the flag, otherwise not
+  if [[ $kubectl_check =~ Major ]]; then
+    kubectl_version_flags="--short"
+  fi
+
+  # Is kubectl version is > 1.14
+  kubectl_version_regex="^Client Version: v([0-9]+)\.([0-9]+)\.([0-9]+)\.*([0-9A-Za-z]*)"
+  kubectl_client_version="$(kubectl version --client "$kubectl_version_flags" 2>/dev/null)"
+  if [[ $kubectl_client_version =~ $kubectl_version_regex ]]; then
+    kubectl_version_major=${BASH_REMATCH[1]}
+    kubectl_version_minor=${BASH_REMATCH[2]}
+    if [[ $kubectl_version_major -lt 1 || ( $kubectl_version_major -eq 1 && $kubectl_version_minor -lt 14 ) ]]; then
+      print_error "This script requires kubectl v1.14+"
+      exit 1
+    fi
+  else
+    print_error "Unrecognized kubectl client version: ${kubectl_client_version}"
+    exit 1
+  fi
+}
+
+# Get and validate helm version
+get_helm_version() {
+  echo "Getting helm version..."
+  helm_version="$(helm version 2> /dev/null)"
+
+  if [ -n "$helm_version" ]; then
+    echo "$helm_version" > "$archive_dir"/helm-version
+  else
+    print_warning "Could not load helm version. Make sure helm is installed."
+  fi
+}
+
+# Get GitLab chart version
+get_chart_version() {
+  echo "Getting GitLab chart version..."
+  chart_version_command() {
+    if grep -q "v2" <<< "$1"; then
+      helm ls "$release" 2> /dev/null
+    else
+      helm "${namespace[@]}" ls | awk "\$1 ~ /""$release""/ { print \$0 }"
+    fi
+  }
+
+  chart_version=$(chart_version_command "$helm_version")
+
+  if [ -n "$chart_version" ]; then
+    echo "$chart_version" > "$archive_dir"/chart-version
+  else
+    print_warning "Unable to retrieve chart version."
+  fi
+}
+
+# Retrieve K8s resources
+get_resources() {
+  echo "Getting Kubernetes resources..."
+  kubectl get pods "${namespace[@]}" > "$archive_dir"/get_pods &
+  kubectl get pods -A -o wide > "$archive_dir"/get_all_pods_wide &
+  kubectl top pods "${namespace[@]}" > "$archive_dir"/top_pods &
+  kubectl get cronjobs "${namespace[@]}" > "$archive_dir"/get_cronjobs &
+  kubectl get jobs "${namespace[@]}" > "$archive_dir"/get_jobs &
+  kubectl describe pods "${namespace[@]}" > "$archive_dir"/describe_pods &
+  kubectl describe nodes "${namespace[@]}" > "$archive_dir"/describe_nodes &
+  kubectl top nodes "${namespace[@]}" > "$archive_dir"/top_nodes &
+  kubectl get services "${namespace[@]}" > "$archive_dir"/get_services &
+  kubectl get endpoints "${namespace[@]}" > "$archive_dir"/get_endpoints &
+  kubectl describe ingress "${namespace[@]}" > "$archive_dir"/describe_ingress &  
+  kubectl get events -o custom-columns=CREATION_TIME:.metadata.creationTimestamp,FIRST_SEEN:.firstTimestamp,LAST_SEEN:.lastTimestamp,COUNT:.count,OBJECT:.involvedObject.kind,NAME:.involvedObject.name,TYPE:.type,REASON:.reason,MESSAGE:.message --sort-by=.lastTimestamp "${namespace[@]}" > "$archive_dir"/events &
+  kubectl get deployments "${namespace[@]}" > "$archive_dir"/get_deployments &
+  kubectl describe deployments "${namespace[@]}" > "$archive_dir"/describe_deployments &
+  kubectl get secrets "${namespace[@]}" > "$archive_dir"/secrets &
+  kubectl get pv "${namespace[@]}" > "$archive_dir"/get_pv &
+  kubectl describe pv "${namespace[@]}" > "$archive_dir"/describe_pv &
+  kubectl get pvc "${namespace[@]}" > "$archive_dir"/get_pvc &
+  kubectl describe pvc "${namespace[@]}" > "$archive_dir"/describe_pvc &
+  kubectl get events "${namespace[@]}" -A > "$archive_dir"/all_events &
+
+  # Get helm history
+  helm_get_history() {
+    if grep -q "v2" <<< "$1"; then
+      HELM_HISTORY=$(helm history "$release")
+    else
+      HELM_HISTORY=$(helm "${namespace[@]}" history "$release")
+    fi
+    echo "$HELM_HISTORY" | tee "$archive_dir"/helm_history
+  }
+
+  # Get user-supplied values
+  helm_get_values_command() {
+    if grep -q "v2" <<< "$1"; then
+      helm get values "$release" > "$archive_dir"/user_supplied_values.yaml
+      helm get values --all "$release" > "$archive_dir"/all_values.yaml
+    else
+      helm "${namespace[@]}" get values "$release" > "$archive_dir"/user_supplied_values.yaml
+      helm "${namespace[@]}" get values --all "$release" > "$archive_dir"/all_values.yaml
+    fi
+  }
+  helm_get_values_command "$helm_version"
+
+  # Get user-supplied values by revision
+  helm_get_values_by_revision() {
+    HELM_HISTORY=$(helm_get_history "$helm_version")
+    HELM_REVISIONS=$(tail -n +2 <<< "$HELM_HISTORY" | cut -f1 | tail -10)
+
+    if grep -q "v2" <<< "$1"; then
+      HELM_COMMAND="helm get values $release"
+    else
+      HELM_COMMAND="helm ""${namespace[*]}"" get values $release"
+    fi
+
+    for revision in $HELM_REVISIONS; do
+      echo "Processing helm revision $revision..."
+      $HELM_COMMAND --revision "$revision" --all > "$archive_dir"/all_values_rev_"$revision".yaml &
+      $HELM_COMMAND --revision "$revision" > "$archive_dir"/user_supplied_values_rev_"$revision".yaml &
+    done
+  }
+  helm_get_values_by_revision "$helm_version"
+}
+
+# Run kubectl logs for current and previous logs
+kubectl_log() {
+    local app=$1 container=$2
+
+    [[ $usepodnames ]] && search="$app" || search="-l app=${app}"
+    
+    [[ $container ]] && container_opt="--container=$container" 
+
+    local logfile="$archive_dir/${app}"
+
+
+    if [ "$container_opt" ] 
+    then
+    	# Run for specified container
+    	# Current log
+        kubectl logs ${prefix:+$prefix} --timestamps "${namespace[@]}" "${search}" \
+      	"${container_opt}" --max-log-requests=50 \
+     	"${timeopt}" "${tailopt}" --ignore-errors=true \
+      	> "${logfile}_${container}.log" &
+
+    	# Previous log
+        kubectl logs ${prefix:+$prefix} --timestamps "${namespace[@]}" "${search}" --previous \
+      	"${container_opt}" --max-log-requests=50 \
+      	${timeopt:+$timeopt} ${tailopt:+$tailopt} --ignore-errors=true \
+      	| grep -v "error: previous terminated container" \
+      	> "${logfile}_${container}_previous.log" &
+ 
+    else
+	# Else run for all containers (by app)
+     
+     # Get containers for $app
+     containers="$(kubectl get pods "${namespace[@]}" "${search}" -o jsonpath='{.items[].spec.initContainers[*].name}' 2>/dev/null )"
+     containers+=" $(kubectl get pods "${namespace[@]}" "${search}" -o jsonpath='{.items[].spec.containers[*].name}' 2>/dev/null )"
+     containers+=" $(kubectl get pods "${namespace[@]}" "${search}" -o jsonpath='{.spec.containers[*].name}' 2>/dev/null )"
+
+     [[ $containers ]] && {
+	for container in $containers
+	do
+          kubectl logs ${prefix:+$prefix} --timestamps "${namespace[@]}" "${search}" \
+                 -c "$container" --max-log-requests=50 "${timeopt}" "${tailopt}" --ignore-errors=true \
+                 > "${logfile}_${container}.log" &
+
+          # Try for previous log
+          kubectl logs ${prefix:+$prefix} --previous --timestamps "${namespace[@]}" "${search}" \
+                 -c "$container" --max-log-requests=50 "${timeopt}" "${tailopt}" --ignore-errors=true \
+                 | grep -v "error: previous terminated container" > "${logfile}_${container}_previous.log" &
+        done
+     }
+     fi
+}
+
+check_background_jobs() {
+	loop=0
+	declare -i jobs
+	jobs=$(jobs | grep -c Running)
+	while [ ${jobs} -ne 0 ] && [ ${loop} -lt ${log_timeout}  ]
+	do
+		echo -e "\rWaiting for $jobs background collections to complete.  \c"
+		sleep 1
+		(( loop ++ ))
+		jobs=$(jobs | grep -c Running)
+		[[ $jobs -eq 0 ]] && echo -e " Done"
+	done
+	[[ ${loop} -ge ${log_timeout} ]] && \
+	echo -e "\n\nWARNING! Some log requests did not complete within ${log_timeout} seconds - consider increasing timeout with the -w option if log collection is partial\n"
+}
+
+# Retrieve logs for components
+get_logs() {
+  echo "Requesting logs..."
+
+  # Choose all logs if none specified
+  [[ ${apps[*]} ]] || IFS=" " read -r -a apps <<< "${ALL_APPS[*]}"
+  echo "Selected logs: ${apps[*]}"
+
+
+  # Set tail length depending on 'since/since_time' set or not
+  tail=${maxlines:-10000}
+  timeopt="--since=0"
+
+  [[ $since ]] && { timeopt="--since=$since"; tail=${maxlines:--1}; }
+  [[ $since_time ]] && { timeopt="--since-time=$since_time"; tail=${maxlines:--1}; }
+  tailopt="--tail=$tail"
+
+
+  for app in "${apps[@]}"; do
+    echo "Requesting logs for $app..."
+
+    # In case we need special handling for a particular $app
+    case $app in
+               *) kubectl_log "${app}";;
+    esac
+  done
+
+  # Wait for log retrieval to complete
+  echo "Waiting for log retrieval to complete"
+  check_background_jobs
+ 
+  # Remove empty logs?
+  echo "Removing empty logs"
+  find "$archive_dir" -name "*.log" -size 0 -delete
+}
+
+# Create the archive file
+create_archive() {
+  echo "Creating archive file..."
+  echo -e "kubeSOS runtime options: $(date)\nRelease=[$release]\nNamespace=[${namespace[*]}]\nSelectedLogs=[${apps[*]}]\nSince=[${since:-$since_time}]\nTail=[${tail}]" > "$archive_dir/kubeSOS.info"
+
+  archive_file="$archive_dir.tar.gz"
+  tar -czf "$archive_file" "$archive_dir"
+  echo "Archive file $archive_file created."
+}
+
+# Main script logic
+
+# Defaults
+declare -i log_timeout=60
+
+# Extract all app annotations from K8s
+
+while getopts 'm:n:pr:hLNl:s:t:w:*' flag; do
+  case "${flag}" in
+    m) maxlines="${OPTARG}" ;;
+    n) namesp="${OPTARG}" ;;
+    p) prefix="--prefix" ;;
+    r) release="${OPTARG}" ;;
+    l) selectapps+=("${OPTARG}") ;;
+    L) selectapps=(true) ;;
+    s) since=${OPTARG} ;;
+    t) since_time=${OPTARG} ;;
+    w) log_timeout=${OPTARG} ;;
+    h) print_usage ;;
+    N) usepodnames=(true); echo -e "\nWARNING! Enabling the -N option will allow the potential collection of logs from non-GitLab related pods. Please check the output before submitting to Support.\n\nAbort now (CTRL-C) if this is not acceptable, otherwise press RETURN to continue:\c"; read -r ;;
+    *) print_error "Illegal option: ${*}" ; print_usage ;;
+  esac
+done
+
+# Shift off all processed options
+shift $((OPTIND-1))
+
+# Check for any remaining arguments
+[[ $# -ne 0 ]] && print_usage
+
+
+# Specify function calls in the appropriate order. This section need to be the last to ensure we only call functions after they're defined
+validate_params
+create_archive_directory
+get_release_and_namespace
+selectApps
+get_kubectl_version
+get_helm_version
+get_chart_version
+get_resources
+get_logs
+create_archive
