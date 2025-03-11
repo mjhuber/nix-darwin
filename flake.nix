@@ -22,7 +22,7 @@
     
     # Define all hosts with their configurations
     hosts = {
-      "huberm-mbair" = {
+      "huberm-mbpro" = {
         username = "huberm";
         useremail = "pfp2024@gmail.com";
         system = "aarch64-darwin";
