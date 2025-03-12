@@ -13,4 +13,14 @@
     "$HOME/go/bin"
   ];
 
+  home.packages = with pkgs; [
+    gocode-gomod
+    godef
+    golint
+    gopkgs
+    gopls
+    gotools
+    go-outline
+  ];
+
 }
