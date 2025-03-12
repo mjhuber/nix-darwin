@@ -25,6 +25,7 @@
       asdf-vm
       atuin
       bat
+      dbeaver-bin
       delta
       direnv
       elixir
