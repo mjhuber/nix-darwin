@@ -19,9 +19,4 @@ set incsearch
 colorscheme catppuccin-frappe
 
 set tabstop=2 shiftwidth=2 expandtab
-
-au BufNewFile,BufRead Jenkinsfile setf groovy
-au BufNewFile,BufRead *.json so ~/.vim/syntax/json.vim
-au BufNewFile,BufRead *.yaml,*.yml so ~/.vim/syntax/yaml.vim
-
 set shada='50,<1000,s100,:0,n~/nvim-shada/main.shada
