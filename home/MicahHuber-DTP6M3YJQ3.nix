@@ -28,6 +28,7 @@
       dbeaver-bin
       delta
       direnv
+      discord
       elixir
       envsubst
       eza
