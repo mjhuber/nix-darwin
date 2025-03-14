@@ -52,9 +52,9 @@
           size={Percent=50}
         }},
         -- CMD + Left Arrow move to beginning of line
-        {key="LeftArrow", mods="CMD", action=wezterm.action{SendString="\x1bOH"}},
+        {key="LeftArrow", mods="CMD", action=wezterm.action{SendString="\x01"}},  -- Ctrl+A
         -- CMD + Right Arrow move to end of line
-        {key="RightArrow", mods="CMD", action=wezterm.action{SendString="\x1bOF"}},
+        {key="RightArrow", mods="CMD", action=wezterm.action{SendString="\x05"}}, -- Ctrl+E
       }
 
       return config
