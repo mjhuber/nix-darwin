@@ -169,6 +169,7 @@
       # icon fonts
       material-design-icons
       font-awesome
+      nerd-fonts.meslo-lg
     ];
   };
 }
