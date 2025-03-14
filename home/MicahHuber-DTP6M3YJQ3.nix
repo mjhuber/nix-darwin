@@ -9,7 +9,6 @@
     "${modDir}/programs/nvim.nix"
     "${modDir}/programs/openssh.nix"
     "${modDir}/programs/scripts.nix"
-    #"${modDir}/programs/starship.nix"
     "${modDir}/programs/wezterm.nix"
     "${modDir}/programs/zsh.nix"
   ];
@@ -46,7 +45,6 @@
       kubectx
       kubernetes-helm
       kubie
-      nerd-fonts
       pre-commit
       python3Full
       signal-desktop
