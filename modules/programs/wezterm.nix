@@ -26,7 +26,7 @@
       config.window_background_opacity = 1.00
       config.color_scheme = 'Catppuccin Frappe'
       config.window_background_opacity = 1.00
-
+      config.warn_about_missing_glyphs = false
       config.window_frame = {
         font_size = 15.0,
         active_titlebar_bg = "#232634",
