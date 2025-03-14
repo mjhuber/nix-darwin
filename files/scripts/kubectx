@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+# Display usage information
+function show_usage {
+  echo "Usage: $0 [context]"
+  echo "  - With no arguments: Shows all available Kubernetes contexts"
+  echo "  - With a context argument: Switches to that context"
+}
+
+# If no arguments provided, show all contexts
+if [ $# -eq 0 ]; then
+  kubectl config get-contexts | awk 'NR>1 {if ($1=="*") {print "\033[1;32m" $2 "\033[0m"} else {print $2}}'
+  exit 0
+fi
+
+# If help flag is provided, show usage
+if [ "$1" == "-h" ] || [ "$1" == "--help" ]; then
+  show_usage
+  exit 0
+fi
+
+# Otherwise, try to switch to the provided context
+kubectl config use-context "$1"

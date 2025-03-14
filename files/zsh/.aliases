@@ -14,7 +14,6 @@ alias history="atuin history list"
 alias k="kubectl"
 alias kns="kubens"
 alias kssh="kubectl node-shell"
-alias kubens="KUBECTX_IGNORE_FZF=1 kubens"
 alias ls="eza"
 alias neat="kubectl-neat"
 # Print each PATH entry on a separate line

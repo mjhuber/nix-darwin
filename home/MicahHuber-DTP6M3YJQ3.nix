@@ -42,7 +42,6 @@
       krew
       kubectl
       kubectl-neat
-      kubectx
       kubernetes-helm
       kubie
       pre-commit
