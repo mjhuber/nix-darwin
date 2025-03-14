@@ -22,6 +22,7 @@
         config = wezterm.config_builder()
       end
       
+      config.font = wezterm.font("MesloLGS NF")
       config.font_size = 15.0
       config.window_background_opacity = 1.00
       config.color_scheme = 'Catppuccin Frappe'
