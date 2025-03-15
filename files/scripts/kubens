@@ -2,18 +2,9 @@
 
 # Display usage information
 function show_usage {
-  echo "Usage: $0 [namespace]"
-  echo "  - With no arguments: Shows all namespaces in the current cluster"
-  echo "  - With a namespace argument: Switches to that namespace"
+  echo "Usage: $0"
+  echo "  - Lists all namespaces in the current cluster and lets you search for the one you want with fzf"
 }
-
-# If no arguments provided, show all namespaces
-if [ $# -eq 0 ]; then
-  current_ns=$(kubectl config view --minify --output 'jsonpath={..namespace}') \
-    && kubectl get namespaces --no-headers | \
-    awk -v current="$current_ns" '{if ($1 == current) {print "\033[1;32m" $1 "\033[0m"} else {print $1}}'
-  exit 0
-fi
 
 # If help flag is provided, show usage
 if [ "$1" == "-h" ] || [ "$1" == "--help" ]; then
@@ -21,14 +12,17 @@ if [ "$1" == "-h" ] || [ "$1" == "--help" ]; then
   exit 0
 fi
 
-# Otherwise, try to switch to the provided namespace
-NAMESPACE=$1
+# List all namespaces and let the user select one with fzf
+current_ns=$(kubectl config view --minify --output 'jsonpath={..namespace}')
+NAMESPACE=$(kubectl get namespaces --no-headers | awk -v current="$current_ns" '{if ($1 == current) {print "\033[1;32m" $1 "\033[0m"} else {print $1}}' | fzf --ansi)
+NAMESPACE=$(echo "$NAMESPACE" | sed 's/\x1b\[[0-9;]*m//g') # Remove ANSI color codes
 
-# Check if the namespace exists
-if kubectl get namespace "$NAMESPACE" &> /dev/null; then
-  echo "Switching to namespace: $NAMESPACE"
-  kubectl config set-context --current --namespace="$NAMESPACE"
-else
-  echo "Error: Namespace '$NAMESPACE' does not exist in the current cluster."
+# Check if a namespace was selected
+if [ -z "$NAMESPACE" ]; then
+  echo "No namespace selected."
   exit 1
 fi
+
+# Switch to the selected namespace
+echo "Switching to namespace: $NAMESPACE"
+kubectl config set-context --current --namespace="$NAMESPACE"

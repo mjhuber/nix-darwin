@@ -29,6 +29,7 @@
       elixir
       envsubst
       eza
+      fzf
       gleam
       gnugrep
       gnused

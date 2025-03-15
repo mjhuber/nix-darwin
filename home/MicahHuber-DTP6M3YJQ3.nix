@@ -31,6 +31,7 @@
       elixir
       envsubst
       eza
+      fzf
       glab
       gleam
       gnugrep
