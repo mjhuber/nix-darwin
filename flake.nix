@@ -57,6 +57,7 @@
             users.users.${username}.home = "/Users/${username}";
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
+            home-manager.backupFileExtension = "backup";
             home-manager.extraSpecialArgs = inputs // {
               inherit username useremail hostname self modDir filesDir;
             };

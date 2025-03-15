@@ -3,6 +3,7 @@
 {
   # import sub modules
   imports = [
+    "${modDir}/programs/atuin.nix"
     "${modDir}/programs/curl.nix"
     "${modDir}/programs/git.nix"
     "${modDir}/programs/go.nix"
@@ -22,7 +23,6 @@
     packages = with pkgs; [
       _1password-cli
       asdf-vm
-      atuin
       bat
       delta
       direnv

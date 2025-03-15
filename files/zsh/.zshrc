@@ -76,9 +76,7 @@ if [ -f '/Users/huberm/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/huberm/g
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/huberm/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/huberm/google-cloud-sdk/completion.zsh.inc'; fi
 
-test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
-
 # max open files
 ulimit -n 10240
 
-eval "$(atuin init zsh)"
+eval "$(atuin init zsh --disable-up-arrow)"
