@@ -30,6 +30,7 @@
       discord
       elixir
       envsubst
+      erlang
       eza
       fzf
       glab

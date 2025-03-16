@@ -28,6 +28,7 @@
       direnv
       elixir
       envsubst
+      erlang
       eza
       fzf
       gleam
