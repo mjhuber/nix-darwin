@@ -48,6 +48,7 @@
       kubie
       pre-commit
       python3Full
+      rebar3
       signal-desktop
       silver-searcher
       stern

@@ -45,6 +45,7 @@
       kubernetes-helm
       kubie
       pre-commit
+      rebar3
       signal-desktop
       silver-searcher
       stern
