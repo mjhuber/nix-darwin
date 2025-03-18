@@ -51,6 +51,7 @@
       rebar3
       signal-desktop
       silver-searcher
+      spotify
       stern
       tree
       unixtools.watch
