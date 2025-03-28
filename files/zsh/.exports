@@ -6,6 +6,7 @@ export GOPATH="$HOME/go"
 export GO111MODULE=on
 export GPG_TTY=$(tty);
 export HELM_HOME="$HOME/.helm"
+export HELM_PLUGINS="$HELM_HOME/plugins"
 export HTTPSTAT_SHOW_SPEED="true"
 export LANG='en_US.UTF-8';
 export LC_ALL='en_US.UTF-8';
