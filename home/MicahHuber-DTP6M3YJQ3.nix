@@ -39,6 +39,7 @@
       gnused
       golangci-lint
       (google-cloud-sdk.withExtraComponents [google-cloud-sdk.components.gke-gcloud-auth-plugin])
+      helm-docs
       helmfile-wrapped
       jq
       krew

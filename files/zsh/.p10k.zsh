@@ -1410,6 +1410,13 @@
   typeset -g POWERLEVEL9K_KUBECONTEXT_CLASSES=(
       # '*prod*'  PROD    # These values are examples that are unlikely
       # '*test*'  TEST    # to match your needs. Customize them as needed.
+      'gke_recharge-infra-services-8b42_us-east4_infra' infra
+      'gke_recharge-prod-services-f818_us-east4_clean-room' clean-room
+      'gke_recharge-prod-services-f818_us-east4_prod' prod
+      'gke_recharge-prod-services-f818_us-east4_prod-rq' prod-rq
+      'gke_recharge-skunk-services-e212_us-east4_skunk' skunk
+      'gke_recharge-stage-services-8e59_us-east4_staging' staging
+      'gke_recharge-stage-services-8e59_us-east4_staging-rq' staging-rq
       '*'       DEFAULT)
   #typeset -g POWERLEVEL9K_KUBECONTEXT_DEFAULT_FOREGROUND=7
   typeset -g POWERLEVEL9K_KUBECONTEXT_DEFAULT_FOREGROUND='0'
