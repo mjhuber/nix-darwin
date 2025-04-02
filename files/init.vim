@@ -4,8 +4,16 @@ call plug#begin()
 Plug 'itchyny/lightline.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
+Plug 'MunifTanjim/nui.nvim'
+Plug 'rcarriga/nvim-notify'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'folke/noice.nvim'
+Plug 'nvim-tree/nvim-tree.lua'
 
 call plug#end()
+
+lua require("noice").setup()
+lua require("nvim-tree").setup()
 
 syntax on
 set number
