@@ -9,6 +9,10 @@ Plug 'rcarriga/nvim-notify'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'folke/noice.nvim'
 Plug 'nvim-tree/nvim-tree.lua'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'itchyny/lightline.vim'
+Plug 'dense-analysis/ale'
+Plug 'airblade/vim-gitgutter'
 
 call plug#end()
 
