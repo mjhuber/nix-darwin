@@ -6,6 +6,7 @@
   home.packages = with pkgs; [
     neovim
   ];
+
   home.file.".config/nvim/init.vim".source = "${filesDir}/init.vim";
 
   # vim-plug
