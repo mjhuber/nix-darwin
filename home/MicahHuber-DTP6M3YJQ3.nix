@@ -47,8 +47,9 @@
       kubectl-neat
       kubernetes-helm
       kubie
+      pipx
+      poetry
       pre-commit
-      python3Full
       rebar3
       signal-desktop
       silver-searcher

@@ -17,6 +17,7 @@ export PATH="${PATH}:${HOME}/.krew/bin"
 export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
 export PATH="${PATH}:${HOME}/scripts"
 export PATH="${PATH}:/opt/homebrew/bin"
+export PATH="${PATH}:~/.local/bin"
 export PYTHONIOENCODING='UTF-8';
 export USE_GKE_GCLOUD_AUTH_PLUGIN=True
 export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=/usr/local/share/zsh-syntax-highlighting/highlighters

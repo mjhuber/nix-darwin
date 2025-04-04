@@ -45,6 +45,8 @@
       kubectl-neat
       kubernetes-helm
       kubie
+      pipx
+      poetry
       pre-commit
       rebar3
       signal-desktop
