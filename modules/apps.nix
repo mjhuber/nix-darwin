@@ -66,7 +66,6 @@
     # `brew install --cask`
     # add your apps here.
     casks = [
-      "alfred"
       "arc"
       "bartender"
       "bazecor"
@@ -82,6 +81,7 @@
       "orbstack"
       "pdf-expert"
       "popclip"
+      "sublime-text"
     ];
   };
 }

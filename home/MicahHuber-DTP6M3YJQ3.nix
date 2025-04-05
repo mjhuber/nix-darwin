@@ -50,6 +50,7 @@
       pipx
       poetry
       pre-commit
+      raycast
       rebar3
       signal-desktop
       silver-searcher

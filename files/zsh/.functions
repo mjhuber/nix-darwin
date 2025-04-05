@@ -18,7 +18,7 @@ gns() {
 
     return
   fi
-  gcloud auth print-access-token &>/dev/null || gcloud auth login
+  gcloud auth print-access-token &>/dev/null || gcloud auth login --update-adc
   case $1 in
     stage | staging | s)
       GCP_PROJECT=recharge-stage-services-8e59
