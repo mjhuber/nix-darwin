@@ -45,7 +45,6 @@
     # otherwise Apple Store will refuse to install them.
     # For details, see https://github.com/mas-cli/mas 
     masApps = {
-      OnePassword = 1333542190;
       TheUnarchiver = 425424353;
       Pages = 409201541;
       Numbers = 409203825;
@@ -66,6 +65,7 @@
     # `brew install --cask`
     # add your apps here.
     casks = [
+      "1password"
       "arc"
       "bartender"
       "bazecor"

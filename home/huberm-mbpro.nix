@@ -22,6 +22,9 @@
 
     packages = with pkgs; [
       _1password-cli
+      # currently marked as broken
+      # https://github.com/NixOS/nixpkgs/issues/254944
+      # _1password-gui
       asdf-vm
       bat
       delta
