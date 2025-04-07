@@ -70,6 +70,7 @@
       "bartender"
       "bazecor"
       "betterdisplay"
+      "chatgpt"
       "claude"
       "cleanshot"
       "clop"
