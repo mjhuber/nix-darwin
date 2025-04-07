@@ -14,6 +14,20 @@ Host 10.* *.rechargeapps.net recharge-*
   ForwardAgent yes
   StrictHostKeyChecking accept-new
 
+Host preprod
+  HostName 10.1.0.10
+  User mhuber_rechargeapps_com
+  IdentityFile ~/.ssh/id_rsa_recharge
+  ForwardAgent yes
+  StrictHostKeyChecking accept-new
+
+Host prestage
+  HostName 10.101.0.15
+  User mhuber_rechargeapps_com
+  IdentityFile ~/.ssh/id_rsa_recharge
+  ForwardAgent yes
+  StrictHostKeyChecking accept-new
+
 Host github.com
   User mjhuber
   IdentityFile ~/.ssh/id_rsa
