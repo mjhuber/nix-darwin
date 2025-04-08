@@ -48,6 +48,7 @@
       kubectl-neat
       kubernetes-helm
       kubie
+      nodejs-slim_23
       pipx
       poetry
       pre-commit

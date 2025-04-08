@@ -13,6 +13,7 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'itchyny/lightline.vim'
 Plug 'dense-analysis/ale'
 Plug 'airblade/vim-gitgutter'
+Plug 'github/copilot.vim'
 
 call plug#end()
 
