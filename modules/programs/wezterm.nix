@@ -36,6 +36,9 @@
         inactive_titlebar_fg = "#c6d0f5"
       }
 
+      config.initial_rows = 50;
+      config.initial_cols = 185;
+
       config.keys = {
         -- Make Option-Left equivalent to Alt-b which many line editors interpret as backward-word
         {key="LeftArrow", mods="OPT", action=wezterm.action{SendString="\x1bb"}},
