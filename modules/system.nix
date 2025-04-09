@@ -32,6 +32,7 @@
       finder = {
         _FXShowPosixPathInTitle = true;  # show full path in finder title
         FXPreferredViewStyle = "Nlsv";  # set default view style to list
+        FXRemoveOldTrashItems = true; # remove items in the trash after 30 days
         AppleShowAllExtensions = true;  # show all file extensions
         AppleShowAllFiles = true; # show hidden files
         FXEnableExtensionChangeWarning = false;  # disable warning when changing file extension
