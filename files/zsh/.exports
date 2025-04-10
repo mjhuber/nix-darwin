@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 export EDITOR='nvim'
 export ERL_AFLAGS="-kernel shell_history enabled"
-export GOBIN=$GOPATH/bin
+export GOBIN=$HOME/go/bin
 export GOPATH="$HOME/go"
 export GO111MODULE=on
 export GPG_TTY=$(tty);
