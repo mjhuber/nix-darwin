@@ -19,6 +19,7 @@
   environment.systemPackages = with pkgs; [
     appcleaner
     coreutils
+    devenv
     hack-font
     home-manager
     mas
