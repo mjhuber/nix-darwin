@@ -61,10 +61,16 @@
             home-manager.extraSpecialArgs = inputs // {
               inherit username useremail hostname self modDir filesDir;
             };
-            home-manager.users.${username}.imports = [
-              ./home/${hostname}.nix
-              mac-app-util.homeManagerModules.default
-            ];
+
+            home-manager.users.${username} = { ... }: {
+              imports = [
+                ./home/${hostname}.nix
+                mac-app-util.homeManagerModules.default
+              ];
+              
+              # Correct namespace for mac-app-util configuration
+              targets.darwin.mac-app-util.enable = true;
+            };
           }
         ];
       };
