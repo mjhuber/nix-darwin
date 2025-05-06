@@ -76,6 +76,7 @@
       "cleanshot"
       "clop"
       "contexts"
+      "cursor"
       "fantastical"
       "firefox"
       "logi-options+"
