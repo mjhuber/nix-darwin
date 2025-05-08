@@ -49,7 +49,8 @@
       TheUnarchiver = 425424353;
       Pages = 409201541;
       Numbers = 409203825;
-      JuxtText = 6504801865;
+      JuxtaText = 6504801865;
+      pdfGear = 6469021132;
     };
 
     taps = [
@@ -82,7 +83,6 @@
       "logi-options+"
       "moom"
       "orbstack"
-      "pdf-expert"
       "popclip"
       "sublime-text"
     ];
