@@ -61,6 +61,7 @@
     # add your apps here.
     brews = [
       "ksd"
+      "uv"
     ];
 
     # `brew install --cask`
