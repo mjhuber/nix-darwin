@@ -17,7 +17,6 @@
   #
   # Related Discussion: https://discourse.nixos.org/t/darwin-again/29331
   environment.systemPackages = with pkgs; [
-    appcleaner
     coreutils
     devenv
     hack-font
@@ -25,6 +24,7 @@
     mas
     mkalias
     obsidian
+    raycast
     slack
     vim
     vscode
@@ -36,9 +36,9 @@
     enable = true;
 
     onActivation = {
-      autoUpdate = false;
+      autoUpdate = true;
       # 'zap': uninstalls all formulae(and related files) not listed here.
-      # cleanup = "zap";
+      cleanup = "zap";
     };
 
     # Applications to install from Mac App Store using mas.
@@ -68,6 +68,7 @@
     # add your apps here.
     casks = [
       "1password"
+      "appcleaner"
       "arc"
       "bartender"
       "bazecor"
