@@ -24,7 +24,6 @@
     mas
     mkalias
     obsidian
-    raycast
     slack
     vim
     vscode
@@ -81,10 +80,12 @@
       "cursor"
       "fantastical"
       "firefox"
+      "knockknock"
       "logi-options+"
       "moom"
       "orbstack"
       "popclip"
+      "raycast"
       "sublime-text"
     ];
   };
