@@ -51,6 +51,7 @@
       kubernetes-helm
       kubie
       nodejs-slim_23
+      pipenv
       pipx
       poetry
       pre-commit
