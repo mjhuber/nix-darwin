@@ -96,3 +96,27 @@ switch() {
     exit 1
   fi
 }
+
+kall() {
+  local cmd="$1"
+  local contexts=(
+    "gke_recharge-stage-services-8e59_us-east4_staging"
+    "gke_recharge-stage-services-8e59_us-east4_staging-rq"
+    "gke_recharge-infra-services-8b42_us-east4_infra"
+    "gke_recharge-prod-services-f818_us-east4_prod"
+    "gke_recharge-prod-services-f818_us-east4_prod-rq"
+    "gke_recharge-skunk-services-e212_us-east4_skunk"
+  )
+
+  for ctx in "${contexts[@]}"; do
+    echo "=========="
+    echo "Context: $ctx"
+    echo "----------"
+    if kubectl config use-context "$ctx" >/dev/null 2>&1; then
+      eval "$cmd"
+    else
+      echo "Failed to switch to context: $ctx"
+    fi
+    echo
+  done
+}
