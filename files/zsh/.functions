@@ -98,7 +98,11 @@ switch() {
 }
 
 kall() {
-  local cmd="$1"
+  local GREEN='\033[0;32m'
+  local NO_COLOR='\033[0m'
+  local KUBERNETES_ICON='\uf68a'
+
+  local cmd="$@"
   local contexts=(
     "gke_recharge-stage-services-8e59_us-east4_staging"
     "gke_recharge-stage-services-8e59_us-east4_staging-rq"
@@ -109,14 +113,8 @@ kall() {
   )
 
   for ctx in "${contexts[@]}"; do
-    echo "=========="
-    echo "Context: $ctx"
-    echo "----------"
-    if kubectl config use-context "$ctx" >/dev/null 2>&1; then
-      eval "$cmd"
-    else
-      echo "Failed to switch to context: $ctx"
-    fi
+    echo -e "${GREEN}${KUBERNETES_ICON} $ctx${NO_COLOR}"
+    eval "kubectl --context $ctx $cmd"
     echo
   done
 }
