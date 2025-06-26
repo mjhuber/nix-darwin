@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+# start templated
+INSTALL_PYTHON=/nix/store/3p3agnh4792y8bgjp0s8xx5bym1ahpks-python3-3.12.9/bin/python3.12
+ARGS=(hook-impl --config=.pre-commit-config.yaml --hook-type=pre-commit --skip-on-missing-config)
+# end templated
+
+HERE="$(cd "$(dirname "$0")" && pwd)"
+ARGS+=(--hook-dir "$HERE" -- "$@")
+
+exec pre-commit "${ARGS[@]}"

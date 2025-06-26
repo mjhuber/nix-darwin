@@ -2,6 +2,9 @@
 	name = Micah Huber
 	email = pfp2024@gmail.com
 
+[init]
+	templateDir = ~/.git-template
+
 [core]
   editor = nvim
   excludesfile = ~/.gitignore_global
