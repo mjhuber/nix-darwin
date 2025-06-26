@@ -49,7 +49,6 @@
       Pages = 409201541;
       Numbers = 409203825;
       JuxtaText = 6504801865;
-      pdfGear = 6469021132;
     };
 
     taps = [
