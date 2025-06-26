@@ -85,6 +85,7 @@
       "logi-options+"
       "moom"
       "orbstack"
+      "pdf-expert"
       "popclip"
       "raycast"
       "sublime-text"
