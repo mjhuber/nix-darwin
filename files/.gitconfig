@@ -1,6 +1,7 @@
 [user]
 	name = Micah Huber
-	email = pfp2024@gmail.com
+	# email = pfp2024@gmail.com
+	email = @email@
 
 [init]
 	templateDir = ~/.git-template

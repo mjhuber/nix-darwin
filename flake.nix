@@ -29,7 +29,7 @@
       };
       "MicahHuber-DTP6M3YJQ3" = {
         username = "huberm";
-        useremail = "pfp2024@gmail.com";
+        useremail = "mhuber@rechargeapps.com";
         system = "aarch64-darwin";
       };
       # Add more hosts here as needed
