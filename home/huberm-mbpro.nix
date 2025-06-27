@@ -48,12 +48,12 @@
       kubectl-neat
       kubernetes-helm
       kubie
-      nodejs-slim_23
+      nodejs-slim
       pipx
       poetry
       pre-commit
       rebar3
-      signal-desktop
+      signal-desktop-bin
       silver-searcher
       stern
       tree

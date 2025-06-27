@@ -1,4 +1,4 @@
-{ self, pkgs, ... }: {
+{ self, pkgs, username, ... }: {
   # Necessary for using flakes on this system.
   nix.settings.experimental-features = "nix-command flakes";
   nix.enable = false;
@@ -17,5 +17,7 @@
   nixpkgs.hostPlatform = "aarch64-darwin";
 
   nixpkgs.config.allowUnfree = true;
+
+  system.primaryUser = "${username}";
 
 }
