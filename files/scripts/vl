@@ -1,0 +1,23 @@
+#!/usr/bin/expect -f
+
+set timeout 10
+set username $env(VAULT_USER)
+set password $env(VAULT_PW)
+
+# Disable terminal echo (even if the child process tries to read from TTY)
+stty -echo
+
+spawn vault login -method=ldap username=$username
+
+# Suppress all output
+log_user 0
+
+expect "Password (will be hidden):"
+send -- "$password\r"
+expect eof
+
+# Re-enable terminal echo
+stty echo
+
+log_user 1
+puts $expect_out(buffer)
