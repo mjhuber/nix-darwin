@@ -12,7 +12,7 @@
     "${modDir}/programs/scripts.nix"
     "${modDir}/programs/wezterm.nix"
     "${modDir}/programs/zsh.nix"
-    "${modDIr}/programs/helix.nix"
+    "${modDir}/programs/helix.nix"
   ];
 
   # Home Manager needs a bit of information about you and the
