@@ -59,6 +59,7 @@
     # `brew install`
     # add your apps here.
     brews = [
+      "asdf"
       "ksd"
       "uv"
     ];
