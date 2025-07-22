@@ -73,7 +73,7 @@ krun() {
 }
 
 switch() {
-  plugins="$(asdf plugin-list)"
+  plugins="$(asdf plugin list)"
 
   if [[ $plugins =~ .*$1.* ]]; then
     # plugin installed
@@ -87,9 +87,10 @@ switch() {
 
     if [[ -f $PWD/.tool-versions ]]; then
       # local setting
-      asdf local $1 $2
+      asdf set --local $1 $2
     else
-      asdf global $1 $2
+      # global setting
+      asdf set --home $1 $2
     fi
   else
     echo "$1 plugin not installed, exiting."
