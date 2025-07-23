@@ -13,7 +13,6 @@
     "${modDir}/programs/wezterm.nix"
     "${modDir}/programs/zsh.nix"
     "${modDir}/programs/helix.nix"
-    "${modDir}/programs/nushell.nix"
   ];
 
   # Home Manager needs a bit of information about you and the
@@ -50,7 +49,6 @@
       kubernetes-helm
       kubie
       nodejs-slim
-      nushell
       pipx
       poetry
       pre-commit
