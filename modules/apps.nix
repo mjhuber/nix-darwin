@@ -60,6 +60,7 @@
     # add your apps here.
     brews = [
       "asdf"
+      "gemini-cli"
       "ksd"
       "uv"
     ];
