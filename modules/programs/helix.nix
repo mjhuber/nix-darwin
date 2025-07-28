@@ -15,6 +15,16 @@
           normal = "block";
           select = "underline";
         };
+      };
+      keys = {
+        normal = {
+          "$" = "goto_line_end";
+          "^" = "goto_first_nonwhitespace";
+        };
+        select = {
+          "$" = "goto_line_end";
+          "^" = "goto_first_nonwhitespace";
+        };
       };      
     };
   };
