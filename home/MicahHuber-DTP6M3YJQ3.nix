@@ -60,6 +60,7 @@
       silver-searcher
       spotify
       stern
+      tfmigrate
       tree
       unixtools.watch
       vals

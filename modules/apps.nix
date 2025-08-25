@@ -54,12 +54,14 @@
     taps = [
       "homebrew/services"
       "mfuentesg/tap"
+      "shopify/shopify"
     ];
 
     # `brew install`
     # add your apps here.
     brews = [
       "asdf"
+      "ejson"
       "ksd"
       "uv"
     ];
