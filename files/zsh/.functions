@@ -119,3 +119,25 @@ kall() {
     echo
   done
 }
+
+hfall() {
+  local GREEN='\033[0;32m'
+  local NO_COLOR='\033[0m'
+  local KUBERNETES_ICON='\uf68a'
+
+  local cmd="$@"
+  local envs=(
+    "skunk"
+    "stage"
+    "stage-rq"
+    "infra"
+    "prod"
+    "prod-rq"
+  )
+
+  for e in "${envs[@]}"; do
+    echo -e "${GREEN}${KUBERNETES_ICON} $e${NO_COLOR}"
+    eval "helmfile -e ${e} $cmd"
+    echo
+  done  
+}
