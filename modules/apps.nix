@@ -60,9 +60,11 @@
     # `brew install`
     # add your apps here.
     brews = [
+      "argoproj/tap/kubectl-argo-rollouts"
       "asdf"
       "ejson"
       "ksd"
+      "prek"
       "uv"
     ];
 

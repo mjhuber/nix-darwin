@@ -55,7 +55,6 @@
       pipenv
       pipx
       poetry
-      pre-commit
       rebar3
       signal-desktop-bin
       silver-searcher
