@@ -120,6 +120,29 @@ kall() {
   done
 }
 
+hall() {
+  local GREEN='\033[0;32m'
+  local NO_COLOR='\033[0m'
+  local KUBERNETES_ICON='\uf68a'
+
+  local cmd="$@"
+  local contexts=(
+    "gke_recharge-stage-services-8e59_us-east4_staging"
+    "gke_recharge-stage-services-8e59_us-east4_staging-rq"
+    "gke_recharge-infra-services-8b42_us-east4_infra"
+    "gke_recharge-prod-services-f818_us-east4_prod"
+    "gke_recharge-prod-services-f818_us-east4_prod-rq"
+    "gke_recharge-skunk-services-e212_us-east4_skunk"
+  )
+
+  for ctx in "${contexts[@]}"; do
+    echo -e "${GREEN}${KUBERNETES_ICON} $ctx${NO_COLOR}"
+    eval "helm --kube-context $ctx $cmd"
+    echo
+  done
+  
+}
+
 hfall() {
   local GREEN='\033[0;32m'
   local NO_COLOR='\033[0m'

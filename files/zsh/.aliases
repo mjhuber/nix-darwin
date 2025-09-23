@@ -25,6 +25,8 @@ if [[ "$(uname)" != 'Darwin' ]]; then
   alias pbpaste='xclip -selection clipboard -o'
 fi
 
+alias pre-commit="prek"
+
 # Enable aliases to be sudo’ed
 alias sudo='sudo '
 alias tf='terraform'
