@@ -1,6 +1,6 @@
 call plug#begin()
 
-" Plugins
+" Plugins (removed duplicates)
 Plug 'itchyny/lightline.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
@@ -10,15 +10,29 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'folke/noice.nvim'
 Plug 'nvim-tree/nvim-tree.lua'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'itchyny/lightline.vim'
 Plug 'dense-analysis/ale'
-Plug 'airblade/vim-gitgutter'
 Plug 'github/copilot.vim'
+Plug 'folke/which-key.nvim'
 
 call plug#end()
 
-lua require("noice").setup()
-lua require("nvim-tree").setup()
+" Lua configurations
+lua << EOF
+require("noice").setup()
+require("nvim-tree").setup()
+require("which-key").setup({
+  plugins = {
+    presets = {
+      operators = true,
+      motions = true,
+      text_objects = true,
+      windows = true,
+      nav = true,
+    },
+  },
+  delay = 0,
+})
+EOF
 
 syntax on
 set number
