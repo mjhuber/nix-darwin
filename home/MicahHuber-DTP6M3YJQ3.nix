@@ -45,6 +45,7 @@
       grpcurl
       helm-docs
       helmfile-wrapped
+      ice-bar
       jq
       krew
       kubectl
