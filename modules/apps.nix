@@ -43,7 +43,7 @@
     # Applications to install from Mac App Store using mas.
     # You need to install all these Apps manually first so that your apple account have records for them.
     # otherwise Apple Store will refuse to install them.
-    # For details, see https://github.com/mas-cli/mas 
+    # For details, see https://github.com/mas-cli/mas
     masApps = {
       TheUnarchiver = 425424353;
       Pages = 409201541;
@@ -92,7 +92,7 @@
       "pdf-expert"
       "popclip"
       "raycast"
-      "sublime-text"
+      "zed"
     ];
   };
 }

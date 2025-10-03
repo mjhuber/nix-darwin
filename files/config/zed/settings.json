@@ -1,0 +1,45 @@
+{
+  "icon_theme": "Catppuccin Latte",
+  "vim_mode": true,
+  "buffer_font_family": "Menlo",
+  "ui_font_family": "Menlo",
+  "use_system_window_tabs": false,
+  "terminal": {
+    "blinking": "on",
+    "font_family": "Hack",
+    "font_size": 14.0
+  },
+  "multi_cursor_modifier": "cmd_or_ctrl",
+  "minimap": {
+    "show": "never"
+  },
+  "cursor_blink": true,
+  "file_types": {
+    "yaml": ["*.yml.gotmpl", "*.yaml.gotmpl"],
+    "terraform": ["*.tf", "*.tfvars"]
+  },
+  "completions": {
+    "words": "disabled",
+    "words_min_length": 3,
+    "lsp": true,
+    "lsp_fetch_timeout_ms": 0,
+    "lsp_insert_mode": "replace_suffix"
+  },
+  "auto_indent_on_paste": true,
+  "use_auto_surround": false,
+  "show_edit_predictions": false,
+  "ensure_final_newline_on_save": true,
+  "tab_size": 2,
+  "telemetry": {
+    "metrics": false,
+    "diagnostics": false
+  },
+  "base_keymap": "VSCode",
+  "ui_font_size": 16,
+  "buffer_font_size": 24.0,
+  "theme": {
+    "mode": "system",
+    "light": "Catppuccin Frappé - No Italics",
+    "dark": "Ayu Dark"
+  }
+}
