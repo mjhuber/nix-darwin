@@ -52,6 +52,7 @@
       kubectl-neat
       kubernetes-helm
       kubie
+      nil
       nodejs-slim
       pipenv
       pipx

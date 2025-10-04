@@ -50,6 +50,7 @@
       kubectl-neat
       kubernetes-helm
       kubie
+      nil
       nodejs-slim
       pipx
       poetry

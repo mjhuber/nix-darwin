@@ -41,5 +41,10 @@
     "mode": "system",
     "light": "Catppuccin Frappé - No Italics",
     "dark": "Ayu Dark"
+  },
+  "languages": {
+    "Nix": {
+      "language_servers": ["nil"]
+    }
   }
 }

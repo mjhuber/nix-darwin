@@ -1,0 +1,10 @@
+[
+  {
+    "context": "Workspace",
+    "bindings": {
+      "alt-t": "terminal_panel::ToggleFocus",
+      "alt-f": "project_panel::ToggleFocus",
+      "alt-e": "workspace::ActivatePreviousPane"
+    }
+  }
+]
