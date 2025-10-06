@@ -31,7 +31,7 @@ help:
 # Apply the configuration for the current host.
 deploy:
 	@echo "Switching to flake configuration: $(FLAKE_URI)"
-	@sudo darwin-rebuild switch --flake $(FLAKE_URI)
+	@sudo -H darwin-rebuild switch --flake $(FLAKE_URI)
 	@echo "Deployment complete."
 
 # Update flake inputs.
