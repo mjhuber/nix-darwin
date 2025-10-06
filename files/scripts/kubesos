@@ -6,7 +6,7 @@ print_usage() {
   echo "Capture Kubernetes environment, configuration and logs. Generate compressed tar bundle for GitLab support.
 
   -n               Kubernetes namespace context to use (defaults to 'default')
-  -r               release name to reference for helm based extraction 
+  -r               release name to reference for helm based extraction
   -l app           application annotation to match for log gathering (can be used multiple times)
   -L               select applications interactively
   -N               use pod names instead of Kubernetes app annotation
@@ -74,11 +74,11 @@ selectApps() {
       [[ ${apps[*]} ]] && return
 
     else
-  
+
       echo -e "\nThe following logs are available:\n"
-  
+
       PS3="Select application/pod for log extraction (Enter '1' when done):"
-  
+
       SELECT=${sorted_apps[*]}
       select app in '[END SELECTION]' $SELECT
       do
@@ -225,7 +225,7 @@ get_resources() {
   kubectl top nodes "${namespace[@]}" > "$archive_dir"/top_nodes &
   kubectl get services "${namespace[@]}" > "$archive_dir"/get_services &
   kubectl get endpoints "${namespace[@]}" > "$archive_dir"/get_endpoints &
-  kubectl describe ingress "${namespace[@]}" > "$archive_dir"/describe_ingress &  
+  kubectl describe ingress "${namespace[@]}" > "$archive_dir"/describe_ingress &
   kubectl get events -o custom-columns=CREATION_TIME:.metadata.creationTimestamp,FIRST_SEEN:.firstTimestamp,LAST_SEEN:.lastTimestamp,COUNT:.count,OBJECT:.involvedObject.kind,NAME:.involvedObject.name,TYPE:.type,REASON:.reason,MESSAGE:.message --sort-by=.lastTimestamp "${namespace[@]}" > "$archive_dir"/events &
   kubectl get deployments "${namespace[@]}" > "$archive_dir"/get_deployments &
   kubectl describe deployments "${namespace[@]}" > "$archive_dir"/describe_deployments &
@@ -283,13 +283,13 @@ kubectl_log() {
     local app=$1 container=$2
 
     [[ $usepodnames ]] && search="$app" || search="-l app=${app}"
-    
-    [[ $container ]] && container_opt="--container=$container" 
+
+    [[ $container ]] && container_opt="--container=$container"
 
     local logfile="$archive_dir/${app}"
 
 
-    if [ "$container_opt" ] 
+    if [ "$container_opt" ]
     then
     	# Run for specified container
     	# Current log
@@ -304,10 +304,10 @@ kubectl_log() {
       	${timeopt:+$timeopt} ${tailopt:+$tailopt} --ignore-errors=true \
       	| grep -v "error: previous terminated container" \
       	> "${logfile}_${container}_previous.log" &
- 
+
     else
 	# Else run for all containers (by app)
-     
+
      # Get containers for $app
      containers="$(kubectl get pods "${namespace[@]}" "${search}" -o jsonpath='{.items[].spec.initContainers[*].name}' 2>/dev/null )"
      containers+=" $(kubectl get pods "${namespace[@]}" "${search}" -o jsonpath='{.items[].spec.containers[*].name}' 2>/dev/null )"
@@ -375,7 +375,7 @@ get_logs() {
   # Wait for log retrieval to complete
   echo "Waiting for log retrieval to complete"
   check_background_jobs
- 
+
   # Remove empty logs?
   echo "Removing empty logs"
   find "$archive_dir" -name "*.log" -size 0 -delete

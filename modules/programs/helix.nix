@@ -25,7 +25,7 @@
           "$" = "goto_line_end";
           "^" = "goto_first_nonwhitespace";
         };
-      };      
+      };
     };
   };
 }

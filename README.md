@@ -26,7 +26,7 @@ sudo scutil --set HostName huberm && \
 
 
 ## FAQ
-* How do I uninstall? 
+* How do I uninstall?
 I have not tried it but determinte [provides an uninstall script](https://zero-to-nix.com/start/uninstall/): `/nix/nix-installer uninstall`.
 
 * What if i get an error that the command `darwin-rebuild` is not found?

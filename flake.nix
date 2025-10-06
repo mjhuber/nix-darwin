@@ -19,7 +19,7 @@
     # Common variables
     modDir = "${self}/modules";
     filesDir = "${self}/files";
-    
+
     # Define all hosts with their configurations
     hosts = {
       "huberm-mbpro" = {
@@ -34,17 +34,17 @@
       };
       # Add more hosts here as needed
     };
-    
+
     # Function to create Darwin configurations
-    mkDarwinConfig = hostname: { username, useremail, system, ... }: 
+    mkDarwinConfig = hostname: { username, useremail, system, ... }:
       nix-darwin.lib.darwinSystem {
         inherit system;
-        
+
         # Create specialized args for this specific host
         specialArgs = inputs // {
           inherit username useremail hostname self modDir filesDir;
         };
-        
+
         modules = [
           ./modules/configuration.nix
           ./modules/apps.nix
@@ -67,7 +67,7 @@
                 ./home/${hostname}.nix
                 mac-app-util.homeManagerModules.default
               ];
-              
+
               # Correct namespace for mac-app-util configuration
               targets.darwin.mac-app-util.enable = true;
             };

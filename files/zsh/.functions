@@ -27,7 +27,7 @@ gns() {
     stage-rq | staging-rq | srq)
       GCP_PROJECT=recharge-stage-services-8e59
       CLUSTER=gke_recharge-stage-services-8e59_us-east4_staging-rq
-      ;;      
+      ;;
     infra | i)
       GCP_PROJECT=recharge-infra-services-8b42
       CLUSTER=gke_recharge-infra-services-8b42_us-east4_infra
@@ -45,7 +45,7 @@ gns() {
       CLUSTER=skunk
       REGION=us-east4
       CLUSTER=gke_recharge-skunk-services-e212_us-east4_skunk
-      ;;         
+      ;;
   esac
 
   gcloud config set project $GCP_PROJECT
@@ -140,7 +140,7 @@ hall() {
     eval "helm --kube-context $ctx $cmd"
     echo
   done
-  
+
 }
 
 hfall() {
@@ -162,5 +162,5 @@ hfall() {
     echo -e "${GREEN}${KUBERNETES_ICON} $e${NO_COLOR}"
     eval "helmfile -e ${e} $cmd"
     echo
-  done  
+  done
 }

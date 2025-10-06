@@ -1,4 +1,11 @@
-{ modDir, pkgs, username, useremail, hostname, ... }:
+{
+  modDir,
+  pkgs,
+  username,
+  useremail,
+  hostname,
+  ...
+}:
 
 {
   # import sub modules
@@ -29,6 +36,7 @@
       # _1password-gui
       bat
       dbeaver-bin
+      claude-code
       delta
       direnv
       discord
@@ -42,7 +50,7 @@
       gnugrep
       gnused
       golangci-lint
-      (google-cloud-sdk.withExtraComponents [google-cloud-sdk.components.gke-gcloud-auth-plugin])
+      (google-cloud-sdk.withExtraComponents [ google-cloud-sdk.components.gke-gcloud-auth-plugin ])
       grpcurl
       helm-docs
       helmfile-wrapped

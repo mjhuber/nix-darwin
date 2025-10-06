@@ -16,7 +16,7 @@ fi
 # Check if a namespace argument was provided
 if [ -n "$1" ]; then
   NAMESPACE="$1"
-  
+
   # Verify the namespace exists
   if ! kubectl get namespace "$NAMESPACE" &>/dev/null; then
     echo "Error: Namespace '$NAMESPACE' does not exist."
