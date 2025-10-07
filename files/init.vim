@@ -13,6 +13,7 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'dense-analysis/ale'
 Plug 'github/copilot.vim'
 Plug 'folke/which-key.nvim'
+Plug 'akinsho/toggleterm.nvim', {'tag' : '*'}
 
 call plug#end()
 
@@ -32,6 +33,15 @@ require("which-key").setup({
   },
   delay = 0,
 })
+require("toggleterm").setup{
+  size = 20,
+  open_mapping = [[<M-t>]], -- ⌥ + t (Option + T)
+  direction = 'horizontal',
+  shade_terminals = true,
+  start_in_insert = true,
+  persist_size = true,
+  persist_mode = true,
+}
 EOF
 
 syntax on

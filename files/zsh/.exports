@@ -10,6 +10,7 @@ export HELM_PLUGINS="$HELM_HOME/plugins"
 export HTTPSTAT_SHOW_SPEED="true"
 export LANG='en_US.UTF-8';
 export LC_ALL='en_US.UTF-8';
+export LESS='-N';
 export LESS_TERMCAP_md="${yellow}";
 export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
 export PATH="$PATH:$GOPATH:$GOBIN"

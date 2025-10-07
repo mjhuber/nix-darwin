@@ -59,6 +59,8 @@
         {key="LeftArrow", mods="CMD", action=wezterm.action{SendString="\x01"}},  -- Ctrl+A
         -- CMD + Right Arrow move to end of line
         {key="RightArrow", mods="CMD", action=wezterm.action{SendString="\x05"}}, -- Ctrl+E
+        {key="RightArrow", mods="CMD|OPT", action=wezterm.action.ActivateTabRelative(1)},
+        {key="LeftArrow", mods="CMD|OPT", action=wezterm.action.ActivateTabRelative(-1)},
       }
 
       return config

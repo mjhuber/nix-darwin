@@ -16,6 +16,7 @@ alias kns="kubens"
 alias kssh="kubectl node-shell"
 alias kubnes="kubens"
 alias ls="eza"
+alias less="bat"
 alias neat="kubectl-neat"
 # Print each PATH entry on a separate line
 alias path='echo -e ${PATH//:/\\n}'
