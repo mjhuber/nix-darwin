@@ -75,7 +75,6 @@
       "1password"
       "appcleaner"
       "arc"
-      "bartender"
       "bazecor"
       "betterdisplay"
       "chatgpt"
