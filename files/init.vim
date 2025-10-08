@@ -49,9 +49,13 @@ require("toggleterm").setup{
 }
 
 require("which-key").add({
-  { "<leader>t",  group = "Tabs" },
-  { "<leader>th", "<C-w>s", desc = "Horizontal Split" },
-  { "<leader>tv", "<C-w>v", desc = "Vertical Split" },
+  { "<leader>s",  group = "Splits" },
+  { "<leader>sh", "<C-w>s", desc = "Horizontal Split" },
+  { "<leader>sv", "<C-w>v", desc = "Vertical Split" },
+  { "<leader>sj", "<C-w>h", desc = "Left Split" },
+  { "<leader>sl", "<C-w>l", desc = "Right Split" },
+  { "<leader>si", "<C-w>k", desc = "Up Split" },
+  { "<leader>sk", "<C-w>j", desc = "Down Split" },
 }, { mode = "n" })
 EOF
 
