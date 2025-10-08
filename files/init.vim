@@ -25,7 +25,33 @@ let mapleader = ","
 " Lua configurations
 lua << EOF
 require("noice").setup()
-require("nvim-tree").setup()
+
+-- nvim-tree config
+local api = require("nvim-tree.api")
+
+require("nvim-tree").setup({
+  actions = {
+    open_file = {
+      -- optional: avoids the window-picker stealing splits
+      window_picker = { enable = false },
+    },
+  },
+  on_attach = function(bufnr)
+    -- 1) load all default mappings (gives you v/s/t/<CR>/etc.)
+    api.config.mappings.default_on_attach(bufnr)
+
+    -- 2) (optional) explicitly ensure v/s do what you want
+    local opts = { buffer = bufnr, noremap = true, silent = true, nowait = true }
+    vim.keymap.set('n', 'v', api.node.open.vertical,   vim.tbl_extend('force', opts, { desc = 'Open: Vertical Split' }))
+    vim.keymap.set('n', 's', api.node.open.horizontal, vim.tbl_extend('force', opts, { desc = 'Open: Horizontal Split' }))
+
+    -- (optional) leader versions
+    vim.keymap.set('n', '<leader>sv', api.node.open.vertical,   { buffer = bufnr, desc = 'Open: Vertical Split' })
+    vim.keymap.set('n', '<leader>sh', api.node.open.horizontal, { buffer = bufnr, desc = 'Open: Horizontal Split' })
+  end,
+})
+-- nvim-tree config
+
 require("which-key").setup({
   plugins = {
     presets = {
@@ -38,6 +64,7 @@ require("which-key").setup({
   },
   delay = 0,
 })
+
 require("toggleterm").setup{
   size = 20,
   open_mapping = [[<M-t>]], -- ⌥ + t (Option + T)
@@ -49,6 +76,10 @@ require("toggleterm").setup{
 }
 
 require("which-key").add({
+  { "<leader>f", group = "Find" },
+  { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Find Files" },
+  { "<leader>fg", "<cmd>Telescope live_grep<cr>", desc = "Find Grep" },
+
   { "<leader>s",  group = "Splits" },
   { "<leader>sh", "<C-w>s", desc = "Horizontal Split" },
   { "<leader>sv", "<C-w>v", desc = "Vertical Split" },
@@ -57,6 +88,7 @@ require("which-key").add({
   { "<leader>si", "<C-w>k", desc = "Up Split" },
   { "<leader>sk", "<C-w>j", desc = "Down Split" },
 }, { mode = "n" })
+
 EOF
 
 syntax on
@@ -74,5 +106,4 @@ colorscheme catppuccin-frappe
 set tabstop=2 shiftwidth=2 expandtab
 set shada='50,<1000,s100,:0,n~/nvim-shada/main.shada
 
-nnoremap <leader>ff <cmd>Telescope find_files<cr>
-nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap r <C-r>
