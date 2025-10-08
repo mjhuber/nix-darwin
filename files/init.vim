@@ -14,8 +14,13 @@ Plug 'dense-analysis/ale'
 Plug 'github/copilot.vim'
 Plug 'folke/which-key.nvim'
 Plug 'akinsho/toggleterm.nvim', {'tag' : '*'}
-
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.8' }
+Plug 'nvim-mini/mini.nvim', { 'branch': 'stable' }
+Plug 'nvim-tree/nvim-web-devicons'
 call plug#end()
+
+let mapleader = ","
 
 " Lua configurations
 lua << EOF
@@ -42,6 +47,12 @@ require("toggleterm").setup{
   persist_size = true,
   persist_mode = true,
 }
+
+require("which-key").add({
+  { "<leader>t",  group = "Tabs" },
+  { "<leader>th", "<C-w>s", desc = "Horizontal Split" },
+  { "<leader>tv", "<C-w>v", desc = "Vertical Split" },
+}, { mode = "n" })
 EOF
 
 syntax on
@@ -52,8 +63,12 @@ filetype indent on
 set lazyredraw
 set showmatch
 set incsearch
+set clipboard=unnamedplus
 
 colorscheme catppuccin-frappe
 
 set tabstop=2 shiftwidth=2 expandtab
 set shada='50,<1000,s100,:0,n~/nvim-shada/main.shada
+
+nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep<cr>

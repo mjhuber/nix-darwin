@@ -64,6 +64,7 @@
       poetry
       pre-commit
       rebar3
+      ripgrep
       signal-desktop-bin
       silver-searcher
       stern

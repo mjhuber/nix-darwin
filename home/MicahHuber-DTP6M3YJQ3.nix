@@ -66,6 +66,7 @@
       pipx
       poetry
       rebar3
+      ripgrep
       signal-desktop-bin
       silver-searcher
       spotify
