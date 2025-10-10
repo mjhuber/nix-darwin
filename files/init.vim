@@ -87,6 +87,16 @@ require("which-key").add({
   { "<leader>sl", "<C-w>l", desc = "Right Split" },
   { "<leader>si", "<C-w>k", desc = "Up Split" },
   { "<leader>sk", "<C-w>j", desc = "Down Split" },
+
+  { "<leader>n", group = "nvim-tree" },
+  { "<leader>nv", function()
+      require("nvim-tree.api").node.open.vertical()
+      vim.cmd('wincmd L') -- move to far right
+    end, desc = "Open in vertical split" },
+
+  { "<leader>nh", function()
+      require("nvim-tree.api").node.open.horizontal()
+    end, desc = "Open in horizontal split" },
 }, { mode = "n" })
 
 EOF
