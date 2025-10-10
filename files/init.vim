@@ -110,6 +110,8 @@ set lazyredraw
 set showmatch
 set incsearch
 set clipboard=unnamedplus
+set fixendofline
+set endofline
 
 colorscheme catppuccin-frappe
 
