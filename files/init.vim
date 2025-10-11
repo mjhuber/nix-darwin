@@ -102,20 +102,34 @@ require("which-key").add({
 EOF
 
 syntax on
-set number
-set cursorline
-set termguicolors
-filetype indent on
-set lazyredraw
-set showmatch
-set incsearch
 set clipboard=unnamedplus
-set fixendofline
+set confirm
+set cursorline
 set endofline
+set expandtab
+set fixendofline
+set ignorecase
+set incsearch
+set lazyredraw
+set mouse=a
+set nowrap
+set number
+set scrolloff=8
+set shiftwidth=4
+set showmatch
+set sidescrolloff=8
+set signcolumn=yes:2
+set smartcase
+set spell
+set splitright
+set tabstop=4
+set termguicolors
+set title
+set wildmode=longest:full,full
+filetype indent on
 
 colorscheme catppuccin-frappe
 
-set tabstop=2 shiftwidth=2 expandtab
 set shada='50,<1000,s100,:0,n~/nvim-shada/main.shada
 
 nnoremap r <C-r>
