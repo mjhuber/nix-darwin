@@ -24,6 +24,22 @@ call plug#end()
 
 let mapleader = ","
 
+" coc settings
+let g:coc_global_extensions = [
+    \ 'coc-docker',
+    \ 'coc-elixir',
+    \ 'coc-go',
+    \ 'coc-html',
+    \ 'coc-json',
+    \ 'coc-lua',
+    \ 'coc-markdownlint',
+    \ 'coc-prettier',
+    \ 'coc-pyright',
+    \ 'coc-sh',
+    \ 'coc-toml',
+    \ 'coc-yaml'
+    \ ]
+
 " Lua configurations
 lua << EOF
 require("noice").setup()

@@ -34,6 +34,7 @@ deploy:
 	@sudo -H darwin-rebuild switch --flake $(FLAKE_URI)
 	@echo "Deployment complete."
 
+
 # Update flake inputs.
 update:
 	@echo "Updating flake inputs..."
