@@ -50,6 +50,8 @@
       Pages = 409201541;
       Numbers = 409203825;
       JuxtaText = 6504801865;
+      Yoink = 457622435;
+      Paprika = 1303222628;
     };
 
     taps = [
