@@ -59,7 +59,7 @@
       kubernetes-helm
       kubie
       nil
-      nodejs-slim
+      nodejs_24
       pipx
       poetry
       pre-commit

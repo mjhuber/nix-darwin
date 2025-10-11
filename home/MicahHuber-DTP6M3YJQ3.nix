@@ -61,7 +61,7 @@
       kubernetes-helm
       kubie
       nil
-      nodejs-slim
+      nodejs_24
       pipenv
       pipx
       poetry

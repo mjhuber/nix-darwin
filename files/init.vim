@@ -18,6 +18,8 @@ Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.8' }
 Plug 'nvim-mini/mini.nvim', { 'branch': 'stable' }
 Plug 'nvim-tree/nvim-web-devicons'
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 call plug#end()
 
 let mapleader = ","
@@ -97,6 +99,14 @@ require("which-key").add({
   { "<leader>nh", function()
       require("nvim-tree.api").node.open.horizontal()
     end, desc = "Open in horizontal split" },
+
+  -- CoC LSP Mappings
+  { "<leader>g", group = "GoTo" },
+  { "<leader>gd", "<Plug>(coc-definition)", desc = "GoTo Definition" },
+  { "<leader>gtd", "<Plug>(coc-type-definition)", desc = "GoTo Type Definition" },
+  { "<leader>gi", "<Plug>(coc-implementation)", desc = "Go to Implementation" },
+  { "<leader>gr", "<Plug>(coc-references)", desc = "Go to References" },
+
 }, { mode = "n" })
 
 EOF
