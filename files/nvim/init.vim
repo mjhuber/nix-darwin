@@ -20,6 +20,7 @@ Plug 'nvim-mini/mini.nvim', { 'branch': 'stable' }
 Plug 'nvim-tree/nvim-web-devicons'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }
+Plug 'karb94/neoscroll.nvim'
 call plug#end()
 
 let mapleader = ","
