@@ -141,6 +141,7 @@ vim.opt.lazyredraw = true
 vim.opt.mouse = 'a'
 vim.opt.wrap = false
 vim.opt.number = true
+vim.opt.relativenumber = true
 vim.opt.scrolloff = 8
 vim.opt.shiftwidth = 4
 vim.opt.showmatch = true
