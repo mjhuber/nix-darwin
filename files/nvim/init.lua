@@ -109,6 +109,8 @@ require("which-key").add({
   { "<leader>sk", "<C-w>j", desc = "Down Split" },
 
   { "<leader>n", group = "nvim-tree" },
+  { "<leader>nt", "<cmd>NvimTreeToggle<cr>", desc = "Toggle nvim-tree" },
+  { "<leader>nf", "<cmd>NvimTreeFocus<cr>", desc = "Focus nvim-tree" },
   { "<leader>nv", function()
       require("nvim-tree.api").node.open.vertical()
       vim.cmd('wincmd L')
