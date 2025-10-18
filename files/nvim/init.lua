@@ -24,6 +24,7 @@ Plug('nvim-tree/nvim-web-devicons')
 Plug('fatih/vim-go', { ['do'] = ':GoUpdateBinaries' })
 Plug('neoclide/coc.nvim', { branch = 'release' })
 Plug('karb94/neoscroll.nvim')
+Plug('stevearc/conform.nvim')
 
 vim.call('plug#end')
 
@@ -93,6 +94,26 @@ require("toggleterm").setup{
   persist_size = true,
   persist_mode = true,
 }
+
+-- conform
+require("conform").setup({
+  formatters_by_ft = {
+    lua = { "stylua" },
+    python = { "black", "isort" },
+    javascript = { "prettier" },
+    typescript = { "prettier" },
+    json = { "prettier" },
+    yaml = { "prettier" },
+    markdown = { "prettier" },
+    go = { "gofmt", "goimports" },
+    rust = { "rustfmt" },
+    sh = { "shfmt" },
+  },
+  format_on_save = {
+    timeout_ms = 500,
+    lsp_fallback = true,
+  },
+})
 
 -- which-key mappings
 require("which-key").add({
