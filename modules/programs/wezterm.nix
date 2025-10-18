@@ -62,7 +62,7 @@
         {key="RightArrow", mods="CMD|OPT", action=wezterm.action.ActivateTabRelative(1)},
         {key="LeftArrow", mods="CMD|OPT", action=wezterm.action.ActivateTabRelative(-1)},
         -- CTRL + W next pane
-        {key="w", mods="CTRL", action=wezterm.action{ActivatePaneDirection='Next'}},
+        {key="w", mods="OPT", action=wezterm.action{ActivatePaneDirection='Next'}},
       }
 
       return config
