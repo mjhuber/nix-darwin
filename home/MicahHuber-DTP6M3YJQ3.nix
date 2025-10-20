@@ -71,6 +71,7 @@
       silver-searcher
       spotify
       stern
+      stylua
       tfmigrate
       tree
       unixtools.watch

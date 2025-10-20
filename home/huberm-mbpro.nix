@@ -68,6 +68,7 @@
       signal-desktop-bin
       silver-searcher
       stern
+      stylua
       tree
       unixtools.watch
       vals
