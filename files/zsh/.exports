@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-export EDITOR='hx'
+export EDITOR='nvim';
 export ERL_AFLAGS="-kernel shell_history enabled"
 export GOBIN=$HOME/go/bin
 export GOPATH="$HOME/go"

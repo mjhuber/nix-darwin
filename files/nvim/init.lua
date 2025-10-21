@@ -115,6 +115,20 @@ require("conform").setup({
   },
 })
 
+-- telecope
+require('telescope').setup({
+  defaults = {
+    file_ignore_patterns = { "^.git/" },
+    hidden = true,
+  },
+  pickers = {
+    find_files = {
+      hidden = true,
+    },
+  },
+})
+
+
 -- which-key mappings
 require("which-key").add({
   { "<leader>f", group = "Find" },
