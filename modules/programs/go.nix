@@ -5,8 +5,10 @@
 }: {
   programs.go = {
     enable = true;
-    goPath = "go";
-    goBin = "go/bin";
+    env = {
+      GOPATH = "$HOME/go";
+      GOBIN = "$HOME/go/bin";
+    };
   };
 
   home.sessionPath = [
