@@ -69,7 +69,6 @@
       ripgrep
       signal-desktop-bin
       silver-searcher
-      spotify
       stern
       stylua
       tfmigrate
