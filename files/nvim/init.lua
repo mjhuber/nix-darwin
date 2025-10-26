@@ -55,7 +55,8 @@ local api = require("nvim-tree.api")
 
 require("nvim-tree").setup({
 	filters = {
-		custom = { ".git", "node_modules", ".cache" },
+		custom = { "^.git", "node_modules", ".cache" },
+		git_ignored = false,
 	},
 	actions = {
 		open_file = {
