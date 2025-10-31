@@ -97,7 +97,7 @@
       "pdf-expert"
       "popclip"
       "raycast"
-      "zed"
+      "sublime-text"
     ];
   };
 }
