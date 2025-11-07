@@ -78,7 +78,6 @@
       "alfred"
       "appcleaner"
       "arc"
-      "bartender"
       "bazecor"
       "betterdisplay"
       "chatgpt"
