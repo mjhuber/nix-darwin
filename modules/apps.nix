@@ -88,6 +88,7 @@
       "cursor"
       "fantastical"
       "firefox"
+      "google-chrome"
       "homerow"
       "knockknock"
       "logi-options+"
