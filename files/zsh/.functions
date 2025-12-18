@@ -120,6 +120,33 @@ kall() {
   done
 }
 
+kdebug() {
+  local pod="$1"
+  local container="$2"
+
+  if [ -z "$pod" ]; then
+    echo "Usage: kdebug_root <pod-name> [container-name]" >&2
+    return 1
+  fi
+
+  # If no container specified, default to the first container in the pod
+  if [ -z "$container" ]; then
+    container="$(kubectl get pod "$pod" -o jsonpath='{.spec.containers[0].name}')"
+    if [ -z "$container" ]; then
+      echo "Could not determine container name for pod $pod" >&2
+      return 1
+    fi
+  fi
+
+  kubectl debug \
+    "$pod" \
+    --target="$container" \
+    --image=us-docker.pkg.dev/recharge-infra-services-8b42/gcr.io/debug-tools:1.1.0 \
+    --profile=sysadmin \
+    --custom <(echo '{"securityContext":{"runAsUser":0,"runAsGroup":0,"runAsNonRoot":false,"privileged":true,"allowPrivilegeEscalation":true,"capabilities":{"add":["SYS_PTRACE"]}}}') \
+    -it -- bash
+}
+
 hall() {
   local GREEN='\033[0;32m'
   local NO_COLOR='\033[0m'
