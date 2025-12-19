@@ -75,7 +75,6 @@
     # add your apps here.
     casks = [
       "1password"
-      "alfred"
       "appcleaner"
       "arc"
       "bazecor"
