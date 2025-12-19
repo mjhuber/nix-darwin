@@ -31,7 +31,24 @@ help:
 # Apply the configuration for the current host.
 deploy:
 	@echo "Switching to flake configuration: $(FLAKE_URI)"
-	@sudo -H darwin-rebuild switch --flake $(FLAKE_URI)
+	@echo "Building configuration..."
+	@sudo -H darwin-rebuild build --flake $(FLAKE_URI)
+	@echo "Finding system configuration..."
+	@PROFILE_LINK=$$(readlink /nix/var/nix/profiles/system); \
+	if [[ "$$PROFILE_LINK" != /* ]]; then \
+		SYSTEM_CONFIG="/nix/var/nix/profiles/$$PROFILE_LINK"; \
+	else \
+		SYSTEM_CONFIG="$$PROFILE_LINK"; \
+	fi; \
+	if [ -z "$$SYSTEM_CONFIG" ] || [ ! -f "$$SYSTEM_CONFIG/activate" ]; then \
+		echo "Error: Could not find system configuration or activation script"; \
+		echo "Profile link: $$PROFILE_LINK"; \
+		echo "Resolved path: $$SYSTEM_CONFIG"; \
+		ls -la "$$SYSTEM_CONFIG" 2>&1 || true; \
+		exit 1; \
+	fi; \
+	echo "Activating configuration: $$SYSTEM_CONFIG"; \
+	sudo -H $$SYSTEM_CONFIG/activate
 	@echo "Deployment complete."
 
 
