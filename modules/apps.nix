@@ -91,7 +91,6 @@
       "homerow"
       "knockknock"
       "logi-options+"
-      "moom"
       "orbstack"
       "pdf-expert"
       "popclip"
