@@ -71,6 +71,7 @@
         NSAutomaticSpellingCorrectionEnabled = false;  # disable auto spelling correction
         NSNavPanelExpandedStateForSaveMode = true;  # expand save panel by default
         NSNavPanelExpandedStateForSaveMode2 = true;
+        NSWindowShouldDragOnGesture = true; # cmd+opt to drag a window
       };
 
       SoftwareUpdate = {
